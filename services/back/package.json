@@ -1,7 +1,12 @@
 {
   "name": "docker_web_app",
   "version": "1.0.0",
+  "private": true,
   "description": "Node.js on Docker",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:DenisGuiraudet/ICE_LGS.git"
+  },
   "main": "server.js",
   "scripts": {
     "start": "nodemon --exec babel-node server.js"

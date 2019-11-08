@@ -1,8 +1,7 @@
 const MongoClient = require('mongodb').MongoClient
 
-const {
-  MONGO
-} = require('./constants')
+const { MONGO } = require('./constants')
+
 
 var mangodb = null;
 /*
@@ -20,4 +19,5 @@ MongoClient.connect(
     console.log(`Database: ${MONGO.DB}`)
   })
 */
+
 export default mangodb;
