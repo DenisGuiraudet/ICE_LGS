@@ -1,25 +1,36 @@
 'use strict'
 
 const express = require('express')
+const MongoClient = require('mongodb').MongoClient
 
-//import mangodb from './mangodb'
-const { NODE } = require('./constants')
+const { NODE, MONGO } = require('./constants')
 import api from './src/index.js'
 
 
-// app
 const app = express()
 
-// make our mangodb accessible to our router
-/*
-app.use(function(req,res,next){
-  req.mangodb = mangodb;
-  next();
-});
-*/
+MongoClient.connect(
+  MONGO.URL, 
+  {
+    useNewUrlParser: true,
+    useUnifiedTopology: true
+  },
+  (err, client) => {
+    if (err) return console.log(err)
+    // Storing a reference to the database so you can use it later
+    console.log(`Connected MongoDB: ${MONGO.URL}`)
+    console.log(`Database: ${MONGO.DB}`)
 
-app.use('/', api);
+    // make our mangodb accessible to our router
+    app.use(function(req,res,next){
+      req.mangodb = client.db(MONGO.DB)
+      next()
+    });
 
-app.listen(NODE.PORT, NODE.HOST, () => {
-  console.log(`Running on http://${NODE.HOST}:${NODE.PORT}`)
-});
+    app.use('/', api)
+
+    app.listen(NODE.PORT, NODE.HOST, () => {
+      console.log(`Running on http://${NODE.HOST}:${NODE.PORT}`)
+    });
+
+  })

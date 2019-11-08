@@ -1,9 +1,13 @@
 
 export function getExigence(req, res) {
-    res.send({
-        id: req.params.id,
-        type: 'EXIGENCE',
-        name: 'Test',
-        slug: 'test'
-    })
+    req.mangodb.collection("exigence").insertOne(
+        {
+            type: 'EXIGENCE',
+            name: 'Test',
+            slug: 'test'
+        },
+        (err, dbRes) => {
+            if (err) throw err;
+            res.send(dbRes)
+        });
 }

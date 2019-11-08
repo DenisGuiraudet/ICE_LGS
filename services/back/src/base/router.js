@@ -11,12 +11,12 @@ baseRouter.use((req, res, next) => {
 
 // a middleware sub-stack shows request info for any type of HTTP request to the /user/:id path
 baseRouter.use((req, res, next) => {
-    console.log('Request URL:', req.originalUrl)
-    next()
-}, function (req, res, next) {
-    console.log('Request Type:', req.method)
-    next()
-})
+        console.log('Request URL:', req.originalUrl)
+        next()
+    }, function (req, res, next) {
+        console.log('Request Type:', req.method)
+        next()
+    })
 
 // predicate the router with a check and bail out when needed
 baseRouter.use((req, res, next) => {
