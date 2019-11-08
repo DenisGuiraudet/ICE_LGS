@@ -1,13 +1,42 @@
+import { Router } from 'express';
 
-export function getExigence(req, res) {
-    req.mangodb.collection("exigence").insertOne(
+import { TYPE } from '../../constants';
+
+
+var exigenceRouter = Router();
+
+exigenceRouter.get('/:slug', (req, res) => {
+    req.mangodb.collection(TYPE.EXIGENCE).findOne(
         {
-            type: 'EXIGENCE',
-            name: 'Test',
-            slug: 'test'
+            type: TYPE.EXIGENCE,
+            slug: req.params.slug
         },
-        (err, dbRes) => {
+        (err, result) => {
             if (err) throw err;
-            res.send(dbRes)
+            res.send(result)
         });
-}
+});
+
+exigenceRouter.get('/', (req, res) => {
+    req.mangodb.collection(TYPE.EXIGENCE).find({}).toArray(
+        (err, result) => {
+            if (err) throw err;
+            res.send(result)
+        });
+});
+
+exigenceRouter.post('/', (req, res) => {
+    req.mangodb.collection(TYPE.EXIGENCE).insertOne(
+        {
+            type: TYPE.EXIGENCE,
+            name: req.body.name,
+            slug: req.body.slug
+        },
+        (err, result) => {
+            if (err) throw err;
+            res.send(result)
+        });
+});
+
+
+export default exigenceRouter;

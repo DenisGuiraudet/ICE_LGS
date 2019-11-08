@@ -12,3 +12,9 @@ export const MONGO = {
     DB: 'test',
     URL: 'mongodb://' + MONGO_HOST + ':' + MONGO_PORT,
 }
+
+export const TYPE = {
+    CATEGORY: 'CATEGORY',
+    EXIGENCE: 'EXIGENCE',
+    RELATION: 'RELATION'
+}

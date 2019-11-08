@@ -4,7 +4,7 @@ const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 
 const { NODE, MONGO } = require('./constants')
-import api from './src/index.js'
+import api from './src'
 
 
 const app = express()

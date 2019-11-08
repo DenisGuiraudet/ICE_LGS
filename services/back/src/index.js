@@ -1,9 +1,9 @@
 const express = require('express')
 
-import baseRouter from './base/router';
-import categoryRouter from './category/router';
-import exigenceRouter from './exigence/router';
-import relationRouter from './relation/router';
+import baseRouter from './base';
+import categoryRouter from './category';
+import exigenceRouter from './exigence';
+import relationRouter from './relation';
 
 
 const api = express();
