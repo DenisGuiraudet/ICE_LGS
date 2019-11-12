@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
+    <NavBar/>
     <TableList/>
   </div>
 </template>
@@ -8,11 +8,13 @@
 <script>
 // @ is an alias to /src
 import TableList from '@/components/TableList.vue';
+import NavBar from '@/components/NavBar.vue';
+
 
 export default {
   name: 'home',
   components: {
-    TableList,
+    TableList, NavBar,
   },
 };
 </script>
