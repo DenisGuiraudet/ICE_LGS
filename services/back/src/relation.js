@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { TYPES, RELATION_TYPES } from '../../constants';
+import { TYPES, RELATION_TYPES } from '../constants';
 
 
 var relationRouter = Router();

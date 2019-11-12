@@ -1,6 +1,6 @@
 import { Router } from 'express';
 
-import { CATEGORY_TYPES } from '../../constants';
+import { CATEGORY_TYPES } from '../constants';
 
 
 var categoryRouter = Router();
