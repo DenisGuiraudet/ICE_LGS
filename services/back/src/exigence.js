@@ -1,7 +1,7 @@
 import { Router } from 'express';
 
-import { getExigenceFromId } from '../../helper/exigence';
-import { TYPES } from '../../constants';
+import { getExigenceFromId } from '../helper/exigence';
+import { TYPES } from '../constants';
 
 
 var exigenceRouter = Router();
