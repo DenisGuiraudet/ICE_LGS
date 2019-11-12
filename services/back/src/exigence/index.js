@@ -1,36 +1,29 @@
 import { Router } from 'express';
 
-import { TYPE } from '../../constants';
+import { getExigenceFromId } from '../../helper/exigence';
+import { TYPES } from '../../constants';
 
 
 var exigenceRouter = Router();
 
-exigenceRouter.get('/:slug', (req, res) => {
-    req.mangodb.collection(TYPE.EXIGENCE).findOne(
-        {
-            type: TYPE.EXIGENCE,
-            slug: req.params.slug
-        },
+exigenceRouter.get('/all', (req, res) => {
+    req.mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
         (err, result) => {
             if (err) throw err;
             res.send(result)
         });
 });
 
-exigenceRouter.get('/', (req, res) => {
-    req.mangodb.collection(TYPE.EXIGENCE).find({}).toArray(
-        (err, result) => {
-            if (err) throw err;
-            res.send(result)
-        });
+exigenceRouter.get('/:id', (req, res) => {
+    res.send(getExigenceFromId(req, req.params.id));
 });
 
-exigenceRouter.post('/', (req, res) => {
-    req.mangodb.collection(TYPE.EXIGENCE).insertOne(
+exigenceRouter.post('/new', (req, res) => {
+    req.mangodb.collection(TYPES.EXIGENCE).insertOne(
         {
-            type: TYPE.EXIGENCE,
+            type: TYPES.EXIGENCE,
             name: req.body.name,
-            slug: req.body.slug
+            slug: req.body.slug // TODO: do it here from name
         },
         (err, result) => {
             if (err) throw err;
