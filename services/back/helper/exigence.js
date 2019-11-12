@@ -1,5 +1,5 @@
 
-import { TYPES } from '../../constants';
+import { TYPES } from '../constants';
 
 export function getExigenceFromId(req, id) {
     req.mangodb.collection(TYPES.EXIGENCE).findOne(
