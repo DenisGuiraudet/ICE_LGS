@@ -1,15 +1,26 @@
 import { Router } from 'express';
 
-import { TYPE } from '../../constants';
+import { TYPES, RELATION_TYPES } from '../../constants';
 
 
 var relationRouter = Router();
 
-relationRouter.get('/:slug', (req, res) => {
-    req.mangodb.collection(TYPE.RELATION).findOne(
+relationRouter.get('/types', (req, res) => {
+    res.send(RELATION_TYPES);
+});
+
+relationRouter.get('/all', (req, res) => {
+    req.mangodb.collection(TYPES.RELATION).find({}).toArray(
+        (err, result) => {
+            if (err) throw err;
+            res.send(result)
+        });
+});
+
+relationRouter.get('/:id', (req, res) => {
+    req.mangodb.collection(TYPES.RELATION).findOne(
         {
-            type: TYPE.RELATION,
-            slug: req.params.slug
+            _id: req.params.id
         },
         (err, result) => {
             if (err) throw err;
@@ -17,20 +28,13 @@ relationRouter.get('/:slug', (req, res) => {
         });
 });
 
-relationRouter.get('/', (req, res) => {
-    req.mangodb.collection(TYPE.RELATION).find({}).toArray(
-        (err, result) => {
-            if (err) throw err;
-            res.send(result)
-        });
-});
-
-relationRouter.post('/', (req, res) => {
-    req.mangodb.collection(TYPE.RELATION).insertOne(
+relationRouter.post('/new', (req, res) => {
+    req.mangodb.collection(TYPES.RELATION).insertOne(
         {
-            type: TYPE.RELATION,
+            type: TYPES.RELATION,
             name: req.body.name,
-            slug: req.body.slug
+            exigence_1_id: req.body.exigence_1_id,
+            exigence_2_id: req.body.exigence_2_id
         },
         (err, result) => {
             if (err) throw err;

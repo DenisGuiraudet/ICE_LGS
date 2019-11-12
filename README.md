@@ -2,9 +2,28 @@
 
 ### Requirements
 
+`Linux` or `Mac` for easy `shell` scripts
+
 - [npm](https://doc.ubuntu-fr.org/nodejs)
 - [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
 - [docker-compose](https://docs.docker.com/compose/install/)
+
+### To start project
+
+1. Go to `root` of git repository
+2. Start `back` with
+```
+sudo ./scripts/init_back.sh
+```
+3. Start `front` with
+```
+sudo ./scripts/init_front.sh
+```
+
+
+### Back Documentation
+
+- [Back routes](/services/back/README.md)
 
 ### Thanks to
 
