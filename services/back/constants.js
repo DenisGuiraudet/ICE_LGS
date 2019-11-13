@@ -13,7 +13,7 @@ export const MONGO = {
     URL: 'mongodb://' + MONGO_HOST + ':' + MONGO_PORT,
 }
 
-export const TYPE = {
+export const TYPES = {
     CATEGORY: 'CATEGORY',
     EXIGENCE: 'EXIGENCE',
     RELATION: 'RELATION',

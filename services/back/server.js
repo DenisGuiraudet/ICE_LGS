@@ -3,7 +3,8 @@
 const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 
-const { NODE, MONGO } = require('./constants')
+import { cleanDB, addFakeData } from './helper/util'
+import { NODE, MONGO } from './constants'
 import api from './src'
 
 
@@ -21,9 +22,16 @@ MongoClient.connect(
     console.log(`Connected MongoDB: ${MONGO.URL}`)
     console.log(`Database: ${MONGO.DB}`)
 
-    // make our mangodb accessible to our router
-    app.use(function(req,res,next){
+    // Make our mangodb accessible to our router
+    app.use((req,res,next) => {
       req.mangodb = client.db(MONGO.DB)
+      next()
+    });
+
+    // TODO: Remove - Init fake data on init
+    app.use((req,res,next) => {
+      cleanDB(req)
+      addFakeData(req)
       next()
     });
 
