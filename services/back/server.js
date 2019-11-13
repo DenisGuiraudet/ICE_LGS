@@ -4,7 +4,6 @@ const express = require('express')
 const MongoClient = require('mongodb').MongoClient
 
 import { cleanDB, addFakeData } from './helper/util'
-// const { NODE, MONGO } = require('./constants')
 import { NODE, MONGO } from './constants'
 import api from './src'
 
