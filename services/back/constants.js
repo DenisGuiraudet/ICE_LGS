@@ -1,0 +1,42 @@
+
+export const NODE = {
+    HOST: '0.0.0.0',
+    PORT: 3000,
+}
+
+const MONGO_HOST = 'mongo';
+const MONGO_PORT = 27017;
+export const MONGO = {
+    HOST: MONGO_HOST,
+    PORT: MONGO_PORT,
+    DB: 'test',
+    URL: 'mongodb://' + MONGO_HOST + ':' + MONGO_PORT,
+}
+
+export const TYPES = {
+    CATEGORY: 'CATEGORY',
+    EXIGENCE: 'EXIGENCE',
+    RELATION: 'RELATION',
+}
+
+export const CATEGORY_TYPES = {
+    BEHAVIOR: 'BEHAVIOR',
+    COMPONENT: 'COMPONENT',
+    CONSTRAINT: 'CONSTRAINT',
+    GOAL: 'GOAL',
+    LACK: 'LACK',
+    LIMIT: 'LIMIT',
+    META_REQUIREMENT: 'META_REQUIREMENT',
+    PRODUCT: 'PRODUCT',
+    TASK: 'TASK',
+}
+
+export const RELATION_TYPES = {
+    DISJOINS: 'DISJOINS',
+    BELONGS: 'BELONGS',
+    REPEATS: 'REPEATS',
+    CONTRADICTS: 'CONTRADICTS',
+    EXTENDS: 'EXTENDS',
+    CONSTRAINTS: 'CONSTRAINTS',
+    CHARACTERIZES: 'CHARACTERIZES',
+}

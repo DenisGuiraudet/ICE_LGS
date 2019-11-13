@@ -1,0 +1,8 @@
+language: ruby
+
+services:
+  - docker
+
+script:
+- sudo ./scripts/init_back.sh
+- sudo ./scripts/init_front.sh
