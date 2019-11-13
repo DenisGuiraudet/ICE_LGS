@@ -14,8 +14,9 @@ exigenceRouter.get('/all', (req, res) => {
         });
 });
 
-exigenceRouter.get('/:id', (req, res) => {
-    res.send(getExigenceFromId(req, req.params.id));
+exigenceRouter.get('/:id', async (req, res) => {
+    let exigence = await getExigenceFromId(req, req.params.id);
+    res.send(exigence);
 });
 
 exigenceRouter.post('/new', (req, res) => {

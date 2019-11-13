@@ -53,7 +53,7 @@ Edition:
             {
                 _id: String, // existing or new
                 name: String,
-                exigence: Exigence._id
+                exigence_2_id: Exigence._id
             }
         ]
     }
@@ -74,7 +74,7 @@ Edition:
 | --- | --- | --- | --- | --- |
 | | GET | /exigence/:id | | Exigence |
 | | GET | /exigence/all | | Exigence List |
-| `EDIT` | POST | /exigence/new | `name`, `category` | Exigence |
+| | POST | /exigence/new | `name`, `category` | Exigence |
 
 #### Relation
 
@@ -83,13 +83,15 @@ Edition:
 | `EDIT` | GET | /relation/types | | Relation Type List |
 | | GET | /relation/:id | | Relation |
 | | GET | /relation/all | | Relation List |
-| `EDIT` | POST | /relation/new | `name`, `exigence_1_id`, `exigence_2_id` | Relation |
+| | POST | /relation/new | `name`, `exigence_1_id`, `exigence_2_id` | Relation |
 
 #### Util
 
 | USE | TYPE | ROUTE | DATA TO SEND | RESULT |
 | --- | --- | --- | --- | --- |
 | `VIEW` | GET | /util/exigences_with_category | | Exigence List, Category List |
-| `VIEW` | GET | /util/exigences_from_category/:name | | Exigence List |
+| `VIEW` | GET | /util/exigences_from_category_name/:name | | Exigence List |
 | `VIEW` | GET | /util/relations_from_exigence/:id | | Exigence List, Relation List, Exigence List |
 | `VIEW` | GET | /util/relations_exigences_from_relation_name/:name | | Exigence List, Exigence List |
+| `EDIT` | GET | /util/editon | | Util Edition |
+| `EDIT` | POST | /util/editon | Util Edition | |
