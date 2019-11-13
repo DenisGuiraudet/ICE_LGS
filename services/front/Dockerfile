@@ -1,4 +1,4 @@
-FROM node:lts-alpine
+FROM node:10
 
 # installe un simple serveur http pour servir un contenu statique
 RUN npm install -g http-server
@@ -20,4 +20,5 @@ COPY . .
 RUN yarn run build
 
 EXPOSE 8080
-CMD [ "http-server", "dist" ]
+# CMD [ "http-server", "dist" ]
+CMD [ "yarn", "serve" ]
