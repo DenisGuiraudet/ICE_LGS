@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import TableList from '@/components/TableList.vue';
+import TableList from '@/components/home/TableList.vue';
 
 
 export default {

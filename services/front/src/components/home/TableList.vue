@@ -1,26 +1,25 @@
 <template>
-  <div class="tabList">
+  <div id="tabList">
     <Table v-for="elem in listElem" :key='elem.name' :currentElement=elem
       @createNewTable="newTable" :id="elem.idTable"/>
   </div>
 </template>
 
 <script>
-import Table from '@/components/Table.vue';
-
+import axios from 'axios';
+import Table from '@/components/home/Table.vue';
 
 export default {
 
   data() {
     return {
-      listElem: [
-        {
-          name: 'Coucou',
-          type: 'Exigence',
-          idTable: '0',
-        },
-      ],
+      listElem: [],
     };
+  },
+  mounted() {
+    axios
+      .get('http://localhost:3000/util/exigences_with_category')
+      .then((response) => { this.listElem.push(response.data); });
   },
   components: {
     Table,
@@ -39,7 +38,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-.tabList {
+#tabList {
   display: flex;
   flex-wrap: nowrap;
 }
