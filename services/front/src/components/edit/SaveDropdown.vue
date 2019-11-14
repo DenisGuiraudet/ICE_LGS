@@ -44,7 +44,7 @@
 
 <script>
 import axios from 'axios';
-import fileDownload  from 'js-file-download';
+import fileDownload from 'js-file-download';
 import moment from 'moment';
 
 import { backUrl } from '@/constants';
@@ -57,7 +57,7 @@ export default {
   data() {
     return {
       opened: false,
-    }
+    };
   },
 
   props: {
@@ -75,7 +75,7 @@ export default {
       axios
         .post(
           `${backUrl}/util/editon`,
-          this.exigenceList
+          this.exigenceList,
         );
     },
     download() {
@@ -86,21 +86,21 @@ export default {
         });
     },
     upload() {
-      let file = this.$refs.file.files[0];
+      const file = this.$refs.file.files[0];
 
-      let reader = new FileReader();
-      reader.readAsText(file, "UTF-8");
-      reader.onload = evt => {
+      const reader = new FileReader();
+      reader.readAsText(file, 'UTF-8');
+      reader.onload = (evt) => {
         axios
           .post(
             `${backUrl}/util/editon`,
-            evt.target.result
+            evt.target.result,
           );
-      }
-      reader.onerror = evt => {
+      };
+      reader.onerror = (evt) => {
         console.error(evt);
-      }
-    }
+      };
+    },
   },
 
 };
