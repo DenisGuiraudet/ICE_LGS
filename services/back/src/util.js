@@ -29,8 +29,9 @@ utilRouter.get('/exigences_with_category', (req, res) => {
             }
 
             res.send({
+                title: '*',
                 types: [ TYPES.EXIGENCE, TYPES.CATEGORY ],
-                data: newResult
+                data: [ newResult ]
             });
         });
 });
@@ -44,6 +45,7 @@ utilRouter.get('/exigences_from_category_name/:name', (req, res) => {
         (err, result) => {
             if (err) throw err;
             res.send({
+                title: `${TYPES.CATEGORY}: ${req.params.name}`,
                 types: [ TYPES.EXIGENCE ],
                 data: result
             });
@@ -98,9 +100,11 @@ utilRouter.get('/relations_from_exigence/:id', (req, res) => {
 
                     resolve();
                 });
-        })
-    ]).then(() => {
+        }),
+        getExigenceFromId(req, req.params.id)
+    ]).then(result => {
         res.send({
+            title: `${TYPES.EXIGENCE}: ${result[2].name}`,
             types: [ TYPES.EXIGENCE, TYPES.RELATION, TYPES.EXIGENCE ],
             data: newResult
         });
@@ -129,6 +133,7 @@ utilRouter.get('/relations_exigences_from_relation_name/:name', (req, res) => {
             }
 
             res.send({
+                title: `${TYPES.RELATION}: ${req.params.name}`,
                 types: [ TYPES.EXIGENCE, TYPES.EXIGENCE ],
                 data: newResult
             });
