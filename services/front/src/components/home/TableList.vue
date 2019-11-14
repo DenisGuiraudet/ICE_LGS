@@ -19,12 +19,27 @@ export default {
   mounted() {
     axios
       .get('http://localhost:3000/util/exigences_with_category')
-      .then((response) => { this.listElem.push(response.data); });
+      .then((response) => {
+        this.newTable(response.data, 0);
+      });
   },
   components: {
     Table,
   },
   methods: {
+    callAPI(type, name, idTable) {
+      switch (type) {
+        case 'LIMIT':
+          axios
+            .get(`http://localhost:3000/util/relations_exigences_from_relation_name/${name}`)
+            .then((response) => {
+              this.newTable(response.data, idTable);
+            });
+          break;
+        default:
+          break;
+      }
+    },
     newTable(selectedElement, idTable) {
       if (idTable < this.listElem.length) {
         this.listElem.splice(idTable + 1, this.listElem.length);
