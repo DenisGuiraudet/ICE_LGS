@@ -1,16 +1,8 @@
 <template>
-  <div id="exigenceCategory">
+  <div id="relationExigence">
       <div class="title">
+        <div>{{ $options.TYPES.RELATION }}</div>
         <div>{{ $options.TYPES.EXIGENCE }}</div>
-        <div>{{ $options.TYPES.CATEGORY }}</div>
-      </div>
-      <div class="content">
-        <div class="line">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
-        </div>
       </div>
   </div>
 </template>
