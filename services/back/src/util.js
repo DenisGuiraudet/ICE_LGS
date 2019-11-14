@@ -31,7 +31,7 @@ utilRouter.get('/exigences_with_category', (req, res) => {
             res.send({
                 title: '*',
                 types: [ TYPES.EXIGENCE, TYPES.CATEGORY ],
-                data: [ newResult ]
+                data: newResult
             });
         });
 });
@@ -47,7 +47,7 @@ utilRouter.get('/exigences_from_category_name/:name', (req, res) => {
             res.send({
                 title: `${TYPES.CATEGORY}: ${req.params.name}`,
                 types: [ TYPES.EXIGENCE ],
-                data: result
+                data: [ result ]
             });
         });
 });
