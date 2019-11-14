@@ -44,10 +44,18 @@ utilRouter.get('/exigences_from_category_name/:name', (req, res) => {
     ).toArray(
         (err, result) => {
             if (err) throw err;
+
+            let newResult = [];
+
+            for (const key in result) {
+                let exigence = result[key];
+                newResult.push([ exigence ]);
+            }
+
             res.send({
                 title: `${TYPES.CATEGORY}: ${req.params.name}`,
                 types: [ TYPES.EXIGENCE ],
-                data: [ result ]
+                data: newResult
             });
         });
 });
