@@ -3,6 +3,7 @@
     <ExigenceCategory
         :selected-exigence="selectedExigence"
         :exigence-list="exigenceList"
+        @selectExigence="selectExigence"
       />
     <RelationExigence
         :selected-exigence="selectedExigence"
@@ -41,6 +42,12 @@ export default {
       });
   },
 
+  methods: {
+    selectExigence(exigence) {
+      this.selectedExigence = exigence;
+    },
+  },
+
 };
 </script>
 
@@ -48,17 +55,44 @@ export default {
 #edit {
   display: flex;
   flex-direction: row;
-  .edit_table {
+  .edit_container {
     flex: 1;
     display: flex;
-    flex-direction: column;
-    .title,
-    .line {
+    flex-direction: row;
+    max-width: 50%;
+    overflow-x: scroll;
+    .edit_table {
+      flex: 1;
       display: flex;
-      flex-direction: row;
-      .cell {
-        flex: 1;
+      flex-direction: column;
+      .title,
+      .line {
+        display: flex;
+        flex-direction: row;
+        .cell {
+          line-height: 35px;
+          flex: 1;
+          input,
+          select {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+          }
+          input {
+            border: 0;
+          }
+        }
       }
+    }
+  }
+  .line_action {
+    display: flex;
+    flex-direction: row;
+    height: 35px;
+    .cell_action {
+      line-height: 35px;
+      width: 35px;
     }
   }
 }

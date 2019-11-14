@@ -1,5 +1,6 @@
 <template>
-  <div id="exigenceCategory" class="edit_table">
+  <div id="exigenceCategory" class="edit_container">
+    <div class="edit_table">
       <div class="title">
         <div class="cell">
           {{ $options.TYPES.EXIGENCE }}
@@ -37,10 +38,26 @@
             </option>
           </select>
         </div>
-        <div class="cell-action">
-
+      </div>
+    </div>
+    <div>
+      <div class="line_action"></div>
+      <div
+          class="line_action"
+          v-for="exigence in exigenceList"
+          :key="exigence._id"
+        >
+        <div class="cell_action">
+          <font-awesome-icon icon="dumpster" />
+        </div>
+        <div
+            class="cell_action"
+            @click="selectExigence(exigence)"
+          >
+          <font-awesome-icon icon="hand-point-right" />
         </div>
       </div>
+    </div>
   </div>
 </template>
 
@@ -67,7 +84,9 @@ export default {
   },
 
   methods: {
-
+    selectExigence(exigence) {
+      this.$emit('selectExigence', exigence);
+    },
   },
 
 };

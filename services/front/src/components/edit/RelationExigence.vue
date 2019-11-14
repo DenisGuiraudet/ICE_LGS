@@ -1,5 +1,6 @@
 <template>
-  <div id="relationExigence" class="edit_table">
+  <div id="relationExigence" class="edit_container">
+    <div class="edit_table">
       <div class="title">
         <div class="cell">
           {{ $options.TYPES.RELATION }}
@@ -49,6 +50,19 @@
           </div>
         </div>
       </template>
+    </div>
+    <div>
+      <div class="line_action"></div>
+      <div
+          class="line_action"
+          v-for="relation in selectedExigence.relations"
+          :key="relation._id"
+        >
+        <div class="cell_action">
+          <font-awesome-icon icon="dumpster" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
