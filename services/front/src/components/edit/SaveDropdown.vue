@@ -76,13 +76,16 @@ export default {
         .post(
           `${backUrl}/util/editon`,
           this.exigenceList,
-        );
+        )
+        .then((response) => {
+          this.$emit('exigenceListChanged', response.data);
+        });
     },
     download() {
       axios
         .get(`${backUrl}/util/editon`)
         .then((response) => {
-          fs.writeFile(`lgs_${moment().format('YYYY_MM_DD')}.json`, response.data);
+          fileDownload(JSON.stringify(response.data), `lgs_${moment().format('YYYY_MM_DD')}.json`);
         });
     },
     upload() {
@@ -94,8 +97,11 @@ export default {
         axios
           .post(
             `${backUrl}/util/editon`,
-            evt.target.result,
-          );
+            JSON.parse(evt.target.result),
+          )
+          .then((response) => {
+            this.$emit('exigenceListChanged', response.data);
+          });
       };
       reader.onerror = (evt) => {
         console.error(evt);

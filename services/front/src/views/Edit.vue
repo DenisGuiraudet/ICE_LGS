@@ -11,6 +11,7 @@
       />
     <SaveDropdown
         :exigence-list="exigenceList"
+        @exigenceListChanged="exigenceListChanged"
       />
   </div>
 </template>
@@ -50,6 +51,9 @@ export default {
   methods: {
     selectExigence(exigence) {
       this.selectedExigence = exigence;
+    },
+    exigenceListChanged(exigenceList) {
+      this.exigenceList = exigenceList;
     },
   },
 

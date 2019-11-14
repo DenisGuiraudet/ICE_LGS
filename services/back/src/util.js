@@ -202,20 +202,27 @@ utilRouter.post('/editon', (req, res) => {
     }
 
     // DELETE
+    console.log('0');
+    console.log(newExigenceList)
+    console.log('1');
+    console.log(newRelationList)
     cleanDB(req.mangodb).then(() => {
-        console.log('--- DELETE done');
+        console.log('2');
         // PUSH NEW OBJECTS
         req.mangodb.collection(TYPES.EXIGENCE).insertMany(
             newExigenceList,
             (err, result) => {
+                console.log('3');
                 if (err) throw err;
 
                 req.mangodb.collection(TYPES.RELATION).insertMany(
                     newRelationList,
                     (err, result) => {
+                        console.log('4');
                         if (err) throw err;
 
                         getExigencesWithRelations(req.mangodb).then(result => {
+                            console.log('5');
                             res.send(result);
                         });
                     });
