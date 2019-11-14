@@ -8,7 +8,7 @@
 <script>
 import axios from 'axios';
 import Table from '@/components/home/Table.vue';
-import { TYPES } from '@/constants';
+import { backUrl, TYPES } from '@/constants';
 
 export default {
 
@@ -19,7 +19,7 @@ export default {
   },
   mounted() {
     axios
-      .get('http://localhost:3000/util/exigences_with_category')
+      .get(`${backUrl}/util/exigences_with_category`)
       .then((response) => {
         this.newTable(response.data, 0);
       });
@@ -33,21 +33,21 @@ export default {
       switch (value.type) {
         case TYPES.CATEGORY:
           axios
-            .get(`http://localhost:3000/util/exigences_from_category_name/${value.name}`)
+            .get(`${backUrl}/util/exigences_from_category_name/${value.name}`)
             .then((response) => {
               this.newTable(response.data, idTable);
             });
           break;
         case TYPES.EXIGENCE:
           axios
-            .get(`http://localhost:3000/util/relations_from_exigence/${value._id}`)
+            .get(`${backUrl}/util/relations_from_exigence/${value._id}`)
             .then((response) => {
               this.newTable(response.data, idTable);
             });
           break;
         case TYPES.RELATION:
           axios
-            .get(`http://localhost:3000/util/relations_exigences_from_relation_name/${value.name}`)
+            .get(`${backUrl}/util/relations_exigences_from_relation_name/${value.name}`)
             .then((response) => {
               this.newTable(response.data, idTable);
             });

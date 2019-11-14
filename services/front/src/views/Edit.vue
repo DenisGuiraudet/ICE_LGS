@@ -8,6 +8,7 @@
 <script>
 import ExigenceCategory from '@/components/edit/ExigenceCategory.vue';
 import RelationExigence from '@/components/edit/RelationExigence.vue';
+import { backUrl } from '@/constants';
 
 
 export default {
@@ -16,6 +17,15 @@ export default {
     ExigenceCategory,
     RelationExigence,
   },
+
+  mounted() {
+    axios
+      .get(`${backUrl}/util/exigences_with_category`)
+      .then((response) => {
+        this.newTable(response.data, 0);
+      });
+  },
+
 };
 </script>
 

@@ -1,5 +1,5 @@
 
-export const backUrl = 'localhost:3000';
+export const backUrl = 'http://localhost:3000';
 
 export const TYPES = {
   CATEGORY: 'CATEGORY',
