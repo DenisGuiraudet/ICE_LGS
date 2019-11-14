@@ -22,16 +22,15 @@ MongoClient.connect(
     console.log(`Connected MongoDB: ${MONGO.URL}`)
     console.log(`Database: ${MONGO.DB}`)
 
+    const mongodb = client.db(MONGO.DB)
+
+    // Fake data
+    cleanDB(mongodb)
+    addFakeData(mongodb)
+
     // Make our mangodb accessible to our router
     app.use((req,res,next) => {
-      req.mangodb = client.db(MONGO.DB)
-      next()
-    });
-
-    // TODO: Remove - Init fake data on init
-    app.use((req,res,next) => {
-      cleanDB(req)
-      addFakeData(req)
+      req.mangodb = mongodb
       next()
     });
 

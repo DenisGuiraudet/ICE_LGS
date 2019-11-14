@@ -197,7 +197,7 @@ utilRouter.post('/editon', (req, res) => {
     }
 
     // DELETE
-    cleanDB(req);
+    cleanDB(req.mangodb);
 
     // PUSH NEW OBJECTS
     req.mangodb.collection(TYPES.EXIGENCE).insertMany(
