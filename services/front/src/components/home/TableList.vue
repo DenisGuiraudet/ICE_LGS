@@ -1,13 +1,14 @@
 <template>
   <div id="tabList">
     <Table v-for="elem in listElem" :key='elem.name' :currentElement=elem
-      @createNewTable="newTable" :id="elem.idTable"/>
+      @callAPI="callAPI" :id="elem.idTable"/>
   </div>
 </template>
 
 <script>
 import axios from 'axios';
 import Table from '@/components/home/Table.vue';
+import { TYPES } from '@/constants';
 
 export default {
 
@@ -27,11 +28,26 @@ export default {
     Table,
   },
   methods: {
-    callAPI(type, name, idTable) {
-      switch (type) {
-        case 'LIMIT':
+    callAPI(value, idTable) {
+      console.log(value.type);
+      switch (value.type) {
+        case TYPES.CATEGORY:
           axios
-            .get(`http://localhost:3000/util/relations_exigences_from_relation_name/${name}`)
+            .get(`http://localhost:3000/util/exigences_from_category_name/${value.name}`)
+            .then((response) => {
+              this.newTable(response.data, idTable);
+            });
+          break;
+        case TYPES.EXIGENCE:
+          axios
+            .get(`http://localhost:3000/util/relations_from_exigence/${value._id}`)
+            .then((response) => {
+              this.newTable(response.data, idTable);
+            });
+          break;
+        case TYPES.RELATION:
+          axios
+            .get(`http://localhost:3000/util/relations_exigences_from_relation_name/${value.name}`)
             .then((response) => {
               this.newTable(response.data, idTable);
             });
