@@ -1,11 +1,12 @@
 <template>
   <div class="table">
+    {{this.currentElement}}
     <p>{{this.currentElement.type}} {{this.currentElement.idTable}}</p>
     <table>
       <tr>
-        <th v-for="value in this.fakeData[0]" :key="value.id">{{value.type}}</th>
+        <th v-for="value in this.currentElement[0]" :key="value.id">{{value.type}}</th>
       </tr>
-      <tr v-for="data in this.fakeData" :key="data[1].id">
+      <tr v-for="data in this.currentElement" :key="data[1].id">
         <td v-for="value in data" :key="value.id"
         @click="$emit('createNewTable', value, currentElement.idTable)">
           {{value.name}}
