@@ -1,8 +1,9 @@
 import { Router } from 'express';
+import { isEmpty } from 'underscore';
 
 import { getExigenceFromId } from '../helper/exigence';
 import { getRelationsFromExigence1Id } from '../helper/relation';
-import { cleanDB } from '../helper/util';
+import { cleanDB, getExigencesWithRelations } from '../helper/util';
 import { TYPES } from '../constants';
 
 
@@ -153,22 +154,9 @@ utilRouter.get('/relations_exigences_from_relation_name/:name', (req, res) => {
 // EDIT
 
 utilRouter.get('/editon', (req, res) => {
-    req.mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
-        async (err, result) => {
-            if (err) throw err;
-
-            let newResult = [];
-
-            for (const key in result) {
-                let exigence = result[key];
-
-                exigence.relations = await getRelationsFromExigence1Id(req.mangodb, exigence._id);
-
-                newResult.push(exigence);
-            }
-
-            res.send(newResult);
-        });
+    getExigencesWithRelations(req.mangodb).then(result => {
+        res.send(result);
+    });
 });
 
 utilRouter.post('/editon', (req, res) => {
@@ -180,43 +168,66 @@ utilRouter.post('/editon', (req, res) => {
     for (const key in req.body.exigences) {
         let exigence = req.body.exigences[key];
 
-        newExigenceList.push({
-            _id: exigence._id,
-            type: TYPES.EXIGENCE,
-            name: exigence.name,
-            slug: exigence.name,
-            category: exigence.category
-        });
+        if (
+            !isEmpty(exigence._id)
+            && !isEmpty(exigence.name)
+            && !isEmpty(exigence.category)
+        ) {
+            newExigenceList.push({
+                _id: exigence._id,
+                type: TYPES.EXIGENCE,
+                name: exigence.name,
+                slug: exigence.name,
+                category: exigence.category
+            });
+        }
 
         for (const keyRelation in exigence.relations) {
             let relation = exigence.relations[keyRelation];
 
-            newRelationList.push({
-                _id: relation._id,
-                type: TYPES.RELATION,
-                name: relation.name,
-                exigence_1_id: exigence._id,
-                exigence_2_id: relation.exigence_2_id
-            })
+            if (
+                !isEmpty(relation._id)
+                && !isEmpty(relation.name)
+                && !isEmpty(relation.exigence_2_id)
+            ) {
+                newRelationList.push({
+                    _id: relation._id,
+                    type: TYPES.RELATION,
+                    name: relation.name,
+                    exigence_1_id: exigence._id,
+                    exigence_2_id: relation.exigence_2_id
+                })
+            }
         }
 
     }
 
     // DELETE
-    cleanDB(req.mangodb);
-
-    // PUSH NEW OBJECTS
-    req.mangodb.collection(TYPES.EXIGENCE).insertMany(
-        newExigenceList,
-        (err, result) => {
-            if (err) throw err;
-        });
-
-    req.mangodb.collection(TYPES.RELATION).insertMany(
-        newRelationList,
-        (err, result) => {
-            if (err) throw err;
-        });
+    cleanDB(req.mangodb).then(() => {
+        // PUSH NEW OBJECTS
+        Promise.all([
+                new Promise(resolve => {
+                    req.mangodb.collection(TYPES.EXIGENCE).insertMany(
+                        newExigenceList,
+                        (err, result) => {
+                            if (err) throw err;
+                            resolve(result);
+                        });
+                }),
+                new Promise(resolve => {
+                    req.mangodb.collection(TYPES.RELATION).insertMany(
+                        newRelationList,
+                        (err, result) => {
+                            if (err) throw err;
+                            resolve(result);
+                        });
+                }),
+            ]).then(() => {
+                getExigencesWithRelations(req.mangodb).then(result => {
+                    res.send(result);
+                });
+            })
+    });
 
 });
 

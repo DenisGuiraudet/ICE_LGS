@@ -2,17 +2,45 @@
 import { TYPES, CATEGORY_TYPES, RELATION_TYPES } from '../constants';
 
 export function cleanDB(mangodb) {
-  mangodb.collection(TYPES.EXIGENCE).deleteMany(
-    {},
-    (err, obj) => {
-      if (err) throw err;
-    });
+  return Promise.all([
+      new Promise(resolve => {
+        mangodb.collection(TYPES.EXIGENCE).deleteMany(
+          {},
+          (err, obj) => {
+            if (err) throw err;
+            resolve();
+          });
+      }),
+      new Promise(resolve => {
+        mangodb.collection(TYPES.RELATION).deleteMany(
+          {},
+          (err, obj) => {
+            if (err) throw err;
+            resolve();
+          });
+      }),
+    ])
+};
 
-mangodb.collection(TYPES.RELATION).deleteMany(
-    {},
-    (err, obj) => {
-      if (err) throw err;
-    });
+export function getExigencesWithRelations(mangodb) {
+  return new Promise(resolve => {
+    mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
+      async (err, result) => {
+          if (err) throw err;
+
+          let newResult = [];
+
+          for (const key in result) {
+              let exigence = result[key];
+
+              exigence.relations = await getRelationsFromExigence1Id(mangodb, exigence._id);
+
+              newResult.push(exigence);
+          }
+
+          resolve(newResult);
+      });
+  })
 };
 
 export function addFakeData(mangodb) {
