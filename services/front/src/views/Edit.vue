@@ -1,11 +1,19 @@
 <template>
   <div id="edit">
-    <ExigenceCategory/>
-    <RelationExigence/>
+    <ExigenceCategory
+        :selected-exigence="selectedExigence"
+        :exigence-list="exigenceList"
+      />
+    <RelationExigence
+        :selected-exigence="selectedExigence"
+        :exigence-list="exigenceList"
+      />
   </div>
 </template>
 
 <script>
+import axios from 'axios';
+
 import ExigenceCategory from '@/components/edit/ExigenceCategory.vue';
 import RelationExigence from '@/components/edit/RelationExigence.vue';
 import { backUrl } from '@/constants';
@@ -18,11 +26,18 @@ export default {
     RelationExigence,
   },
 
+  data() {
+    return {
+      selectedExigence: null,
+      exigenceList: [],
+    };
+  },
+
   mounted() {
     axios
-      .get(`${backUrl}/util/exigences_with_category`)
+      .get(`${backUrl}/util/editon`)
       .then((response) => {
-        this.newTable(response.data, 0);
+        this.exigenceList = response.data;
       });
   },
 
