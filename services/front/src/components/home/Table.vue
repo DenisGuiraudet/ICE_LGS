@@ -1,13 +1,12 @@
 <template>
   <div class="table">
-    {{currentElement}}
-    <p>{{this.currentElement.types[0]}} {{this.currentElement.idTable}}</p>
+    <p>{{this.currentElement.title}} {{this.currentElement.idTable}}</p>
     <table>
       <tr>
         <th v-for="value in this.currentElement.types" :key="value.id">{{value}}</th>
       </tr>
-      <tr v-for="data in this.currentElement.data" :key="data[1].id">
-        <td v-for="value in data" :key="value.id"
+      <tr v-for="item in this.currentElement.data" :key="item.id">
+        <td v-for="value in item" :key="value.id"
         @click="$emit('callAPI', value, currentElement.idTable)">
           {{value.name}}
         </td>
