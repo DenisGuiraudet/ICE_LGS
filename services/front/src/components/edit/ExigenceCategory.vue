@@ -26,9 +26,7 @@
             <option
                 disabled
                 :value="null"
-              >
-              !!!
-            </option>
+              />
             <option
                 v-for="categoryType in $options.CATEGORY_TYPES"
                 :key="categoryType"

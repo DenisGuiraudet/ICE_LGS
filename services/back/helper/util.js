@@ -1,25 +1,25 @@
-
+import { getRelationsFromExigence1Id } from '../helper/relation';
 import { TYPES, CATEGORY_TYPES, RELATION_TYPES } from '../constants';
 
 export function cleanDB(mangodb) {
   return Promise.all([
-      new Promise(resolve => {
-        mangodb.collection(TYPES.EXIGENCE).deleteMany(
-          {},
-          (err, obj) => {
-            if (err) throw err;
-            resolve();
-          });
-      }),
-      new Promise(resolve => {
-        mangodb.collection(TYPES.RELATION).deleteMany(
-          {},
-          (err, obj) => {
-            if (err) throw err;
-            resolve();
-          });
-      }),
-    ])
+    new Promise(resolve => {
+      mangodb.collection(TYPES.EXIGENCE).deleteMany(
+        {},
+        (err, result) => {
+          if (err) throw err;
+          resolve(result);
+        });
+    }),
+    new Promise(resolve => {
+      mangodb.collection(TYPES.RELATION).deleteMany(
+        {},
+        (err, result) => {
+          if (err) throw err;
+          resolve(result);
+        });
+    }),
+  ]);
 };
 
 export function getExigencesWithRelations(mangodb) {

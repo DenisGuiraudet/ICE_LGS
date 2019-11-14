@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { isEmpty } from 'underscore';
 
 import { getExigenceFromId } from '../helper/exigence';
-import { getRelationsFromExigence1Id } from '../helper/relation';
 import { cleanDB, getExigencesWithRelations } from '../helper/util';
 import { TYPES } from '../constants';
 
@@ -86,7 +85,7 @@ utilRouter.get('/relations_from_exigence/:id', (req, res) => {
                         ])
                     }
 
-                    resolve();
+                    resolve(newResult);
                 });
         }),
         new Promise(resolve => {
@@ -108,7 +107,7 @@ utilRouter.get('/relations_from_exigence/:id', (req, res) => {
                         ])
                     }
 
-                    resolve();
+                    resolve(newResult);
                 });
         }),
         getExigenceFromId(req.mangodb, req.params.id)
@@ -165,8 +164,8 @@ utilRouter.post('/editon', (req, res) => {
     let newExigenceList = [];
     let newRelationList = [];
 
-    for (const key in req.body.exigences) {
-        let exigence = req.body.exigences[key];
+    for (const key in req.body) {
+        let exigence = req.body[key];
 
         if (
             !isEmpty(exigence._id)
@@ -204,29 +203,23 @@ utilRouter.post('/editon', (req, res) => {
 
     // DELETE
     cleanDB(req.mangodb).then(() => {
+        console.log('--- DELETE done');
         // PUSH NEW OBJECTS
-        Promise.all([
-                new Promise(resolve => {
-                    req.mangodb.collection(TYPES.EXIGENCE).insertMany(
-                        newExigenceList,
-                        (err, result) => {
-                            if (err) throw err;
-                            resolve(result);
+        req.mangodb.collection(TYPES.EXIGENCE).insertMany(
+            newExigenceList,
+            (err, result) => {
+                if (err) throw err;
+
+                req.mangodb.collection(TYPES.RELATION).insertMany(
+                    newRelationList,
+                    (err, result) => {
+                        if (err) throw err;
+
+                        getExigencesWithRelations(req.mangodb).then(result => {
+                            res.send(result);
                         });
-                }),
-                new Promise(resolve => {
-                    req.mangodb.collection(TYPES.RELATION).insertMany(
-                        newRelationList,
-                        (err, result) => {
-                            if (err) throw err;
-                            resolve(result);
-                        });
-                }),
-            ]).then(() => {
-                getExigencesWithRelations(req.mangodb).then(result => {
-                    res.send(result);
-                });
-            })
+                    });
+            });
     });
 
 });

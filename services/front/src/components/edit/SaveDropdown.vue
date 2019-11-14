@@ -1,12 +1,6 @@
 <template>
   <div id="saveDropdown">
     <div
-        class="save_icon"
-        @click="save"
-      >
-      <font-awesome-icon icon="save" />
-    </div>
-    <div
         v-if="!opened"
         class="save_icon"
         @click="switchOpened"
@@ -14,6 +8,12 @@
       <font-awesome-icon icon="chevron-down" />
     </div>
     <template v-else>
+      <div
+          class="save_icon icon_first"
+          @click="save"
+        >
+        <font-awesome-icon icon="save" />
+      </div>
       <div
           class="save_icon"
           @click="download"
@@ -118,9 +118,13 @@ export default {
   .save_icon {
     width: 50px;
     line-height: 50px;
+    background-color: $text-light;
     cursor: pointer;
     &:hover {
-      background-color: lighten($text-dark, 70%);
+      background-color: lighten($text-dark, 60%);
+    }
+    &.icon_first {
+      border-bottom: solid 1px $text-dark;
     }
   }
   .input_file {

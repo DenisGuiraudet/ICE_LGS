@@ -20,9 +20,7 @@
               <option
                   disabled
                   :value="null"
-                >
-                !!!
-              </option>
+                />
               <option
                   v-for="relationType in $options.RELATION_TYPES"
                   :key="relationType"
@@ -36,6 +34,7 @@
             <input
                 type="text"
                 v-model="relation.exigence_2_id"
+                text="relation.exigence_1_id"
                 list="exigences"
               >
             <datalist id="exigences">
