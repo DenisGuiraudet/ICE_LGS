@@ -35,7 +35,6 @@ export function addFakeData(mangodb) {
     ],
     (err, result) => {
       if (err) throw err;
-      console.log(result)
     });
 
   mangodb.collection(TYPES.RELATION).insertMany(
@@ -50,6 +49,5 @@ export function addFakeData(mangodb) {
     ],
     (err, result) => {
       if (err) throw err;
-      console.log(result)
     });
 };
