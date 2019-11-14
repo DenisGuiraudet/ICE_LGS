@@ -22,6 +22,7 @@ utilRouter.get('/exigences_with_category', (req, res) => {
                 newResult.push([
                     exigence,
                     {
+                        type: TYPES.CATEGORY,
                         name: exigence.category
                     }
                 ])
