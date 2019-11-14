@@ -18,3 +18,23 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#edit {
+  display: flex;
+  flex-direction: row;
+  .edit_table {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    .title,
+    .line {
+      display: flex;
+      flex-direction: row;
+      .cell {
+        flex: 1;
+      }
+    }
+  }
+}
+</style>

@@ -1,15 +1,17 @@
 <template>
-  <div id="exigenceCategory">
+  <div id="exigenceCategory" class="edit_table">
       <div class="title">
-        <div>{{ $options.TYPES.EXIGENCE }}</div>
-        <div>{{ $options.TYPES.CATEGORY }}</div>
+        <div class="cell">
+          {{ $options.TYPES.EXIGENCE }}
+        </div>
+        <div class="cell">
+          {{ $options.TYPES.CATEGORY }}
+        </div>
       </div>
-      <div class="content">
-        <div class="line">
-          <div class="cell">
-          </div>
-          <div class="cell">
-          </div>
+      <div class="line">
+        <div class="cell">
+        </div>
+        <div class="cell">
         </div>
       </div>
   </div>

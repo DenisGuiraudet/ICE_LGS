@@ -1,8 +1,18 @@
 <template>
-  <div id="relationExigence">
+  <div id="relationExigence" class="edit_table">
       <div class="title">
-        <div>{{ $options.TYPES.RELATION }}</div>
-        <div>{{ $options.TYPES.EXIGENCE }}</div>
+        <div class="cell">
+          {{ $options.TYPES.RELATION }}
+        </div>
+        <div class="cell">
+          {{ $options.TYPES.EXIGENCE }}
+        </div>
+      </div>
+      <div class="line">
+        <div class="cell">
+        </div>
+        <div class="cell">
+        </div>
       </div>
   </div>
 </template>

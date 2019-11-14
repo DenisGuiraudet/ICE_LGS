@@ -15,5 +15,9 @@ export default {
 <style scoped lang="scss">
 .navBar {
   height: 50px;
+  h1 {
+    line-height: 50px;
+    margin: 0;
+  }
 }
 </style>
