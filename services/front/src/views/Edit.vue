@@ -93,6 +93,16 @@ export default {
     .cell_action {
       line-height: 35px;
       width: 35px;
+      &.action_erase,
+      &.action_select {
+        border: solid 1px darkgray;
+      }
+      &.action_erase {
+        background: red;
+      }
+      &.action_select {
+        background: blueviolet;
+      }
     }
   }
 }

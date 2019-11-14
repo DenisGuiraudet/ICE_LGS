@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import { getExigenceFromId } from '../helper/exigence';
+import { getRelationsFromExigence1Id } from '../helper/relation';
 import { cleanDB } from '../helper/util';
 import { TYPES } from '../constants';
 
@@ -78,9 +79,9 @@ utilRouter.get('/relations_from_exigence/:id', (req, res) => {
                         let relation = result[key];
         
                         newResult.push([
-                            await getExigenceFromId(req, relation.exigence_1_id),
+                            await getExigenceFromId(req.mangodb, relation.exigence_1_id),
                             relation,
-                            await getExigenceFromId(req, relation.exigence_2_id)
+                            await getExigenceFromId(req.mangodb, relation.exigence_2_id)
                         ])
                     }
 
@@ -100,16 +101,16 @@ utilRouter.get('/relations_from_exigence/:id', (req, res) => {
                         let relation = result[key];
         
                         newResult.push([
-                            await getExigenceFromId(req, relation.exigence_1_id),
+                            await getExigenceFromId(req.mangodb, relation.exigence_1_id),
                             relation,
-                            await getExigenceFromId(req, relation.exigence_2_id)
+                            await getExigenceFromId(req.mangodb, relation.exigence_2_id)
                         ])
                     }
 
                     resolve();
                 });
         }),
-        getExigenceFromId(req, req.params.id)
+        getExigenceFromId(req.mangodb, req.params.id)
     ]).then(result => {
         res.send({
             title: `${TYPES.EXIGENCE}: ${result[2].name}`,
@@ -135,8 +136,8 @@ utilRouter.get('/relations_exigences_from_relation_name/:name', (req, res) => {
                 let relation = result[key];
 
                 newResult.push([
-                    await getExigenceFromId(req, relation.exigence_1_id),
-                    await getExigenceFromId(req, relation.exigence_2_id)
+                    await getExigenceFromId(req.mangodb, relation.exigence_1_id),
+                    await getExigenceFromId(req.mangodb, relation.exigence_2_id)
                 ])
             }
 
@@ -153,7 +154,7 @@ utilRouter.get('/relations_exigences_from_relation_name/:name', (req, res) => {
 
 utilRouter.get('/editon', (req, res) => {
     req.mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
-        (err, result) => {
+        async (err, result) => {
             if (err) throw err;
 
             let newResult = [];
@@ -161,16 +162,7 @@ utilRouter.get('/editon', (req, res) => {
             for (const key in result) {
                 let exigence = result[key];
 
-                req.mangodb.collection(TYPES.RELATION).find(
-                        {
-                            exigence_1_id: exigence._id
-                        }
-                    ).toArray(
-                        (err, resultRelation) => {
-                            if (err) throw err;
-
-                            exigence.relations = resultRelation;
-                        });
+                exigence.relations = await getRelationsFromExigence1Id(req.mangodb, exigence._id);
 
                 newResult.push(exigence);
             }

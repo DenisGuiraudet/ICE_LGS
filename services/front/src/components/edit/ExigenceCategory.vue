@@ -47,11 +47,11 @@
           v-for="exigence in exigenceList"
           :key="exigence._id"
         >
-        <div class="cell_action">
+        <div class="cell_action action_erase">
           <font-awesome-icon icon="dumpster" />
         </div>
         <div
-            class="cell_action"
+            class="cell_action action_select"
             @click="selectExigence(exigence)"
           >
           <font-awesome-icon icon="hand-point-right" />

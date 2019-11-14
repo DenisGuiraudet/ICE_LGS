@@ -58,7 +58,7 @@
           v-for="relation in selectedExigence.relations"
           :key="relation._id"
         >
-        <div class="cell_action">
+        <div class="cell_action action_erase">
           <font-awesome-icon icon="dumpster" />
         </div>
       </div>

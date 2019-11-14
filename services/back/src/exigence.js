@@ -15,7 +15,7 @@ exigenceRouter.get('/all', (req, res) => {
 });
 
 exigenceRouter.get('/:id', async (req, res) => {
-    let exigence = await getExigenceFromId(req, req.params.id);
+    let exigence = await getExigenceFromId(req.mangodb, req.params.id);
     res.send(exigence);
 });
 
