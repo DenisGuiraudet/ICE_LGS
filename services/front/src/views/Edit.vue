@@ -9,6 +9,9 @@
         :selected-exigence="selectedExigence"
         :exigence-list="exigenceList"
       />
+    <SaveDropdown
+        :exigence-list="exigenceList"
+      />
   </div>
 </template>
 
@@ -17,6 +20,7 @@ import axios from 'axios';
 
 import ExigenceCategory from '@/components/edit/ExigenceCategory.vue';
 import RelationExigence from '@/components/edit/RelationExigence.vue';
+import SaveDropdown from '@/components/edit/SaveDropdown.vue';
 import { backUrl } from '@/constants';
 
 
@@ -25,6 +29,7 @@ export default {
   components: {
     ExigenceCategory,
     RelationExigence,
+    SaveDropdown,
   },
 
   data() {
@@ -53,6 +58,7 @@ export default {
 
 <style lang="scss">
 #edit {
+  position: relative;
   display: flex;
   flex-direction: row;
   .edit_container {

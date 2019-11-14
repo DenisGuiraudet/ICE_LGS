@@ -33,6 +33,8 @@ export default {
   display: flex;
   flex-direction: row;
   height: 50px;
+  background-color: $text-dark;
+  color: $text-light;
   h1 {
     flex: 1;
     line-height: 50px;
@@ -42,7 +44,10 @@ export default {
   .navbar_action {
     line-height: 50px;
     width: 50px;
-    color: $text-dark;
+    color: $text-light;
+    &:hover {
+      background-color: lighten($text-dark, 10%);
+    }
   }
 }
 </style>
