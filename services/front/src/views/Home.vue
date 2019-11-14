@@ -15,3 +15,10 @@ export default {
   },
 };
 </script>
+
+<style lang="scss">
+#home {
+  background-image: url('../assets/picture/lapin.jpg');
+  background-size: cover;
+}
+</style>

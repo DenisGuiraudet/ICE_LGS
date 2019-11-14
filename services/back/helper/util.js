@@ -31,6 +31,160 @@ export function addFakeData(mangodb) {
         name: 'Oui mais Non',
         slug: 'oui mais non',
         category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_3',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_4',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_5',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_6',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_7',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_24',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_8',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_9',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_10',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_11',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_12',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_13',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_14',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_15',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_16',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_17',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_18',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_19',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_20',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_21',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_22',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
+      },
+      {
+        _id: 'exigence_id_23',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        slug: 'oui mais non',
+        category: CATEGORY_TYPES.TASK
       }
     ],
     (err, result) => {
