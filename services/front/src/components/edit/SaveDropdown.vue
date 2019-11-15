@@ -1,38 +1,42 @@
 <template>
   <div id="saveDropdown">
-    <div
-        v-if="!opened"
-        class="save_icon icon_dropdown"
-        @click="switchOpened"
-      >
-      <font-awesome-icon icon="chevron-down" />
-    </div>
-    <template v-else>
+    <collapse-transition>
       <div
-          class="save_icon icon_first"
-          @click="save"
-        >
-        <font-awesome-icon icon="save" />
-      </div>
-      <div
-          class="save_icon"
-          @click="download"
-        >
-        <font-awesome-icon icon="download" />
-      </div>
-      <div
-          class="save_icon"
-          @click="$refs.file.click()"
-        >
-        <font-awesome-icon icon="cloud-upload-alt" />
-      </div>
-      <div
+          v-if="!opened"
           class="save_icon icon_dropdown"
           @click="switchOpened"
         >
-        <font-awesome-icon icon="chevron-up" />
+        <font-awesome-icon icon="chevron-down" />
       </div>
-    </template>
+    </collapse-transition>
+    <collapse-transition>
+      <div v-show="opened">
+        <div
+            class="save_icon icon_first"
+            @click="save"
+          >
+          <font-awesome-icon icon="save" />
+        </div>
+        <div
+            class="save_icon"
+            @click="download"
+          >
+          <font-awesome-icon icon="download" />
+        </div>
+        <div
+            class="save_icon"
+            @click="$refs.file.click()"
+          >
+          <font-awesome-icon icon="cloud-upload-alt" />
+        </div>
+        <div
+            class="save_icon icon_dropdown"
+            @click="switchOpened"
+          >
+          <font-awesome-icon icon="chevron-up" />
+        </div>
+      </div>
+    </collapse-transition>
     <input
         type="file"
         ref="file"
@@ -47,11 +51,13 @@ import axios from 'axios';
 import fileDownload from 'js-file-download';
 import moment from 'moment';
 import VueIziToast from 'vue-izitoast';
+import { CollapseTransition } from 'vue2-transitions';
 
 import { backUrl, success } from '@/constants';
 
 export default {
   components: {
+    CollapseTransition,
   },
 
   data() {
