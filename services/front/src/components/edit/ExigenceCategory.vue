@@ -98,6 +98,10 @@ export default {
     eraseExigence(exigenceKey) {
       const exigenceId = this.exigenceList[exigenceKey]._id;
 
+      if (exigenceId === this.selectedExigence._id) {
+        this.$emit('selectExigence', null);
+      }
+
       this.exigenceList.splice(exigenceKey, 1);
       for (const key in this.exigenceList) {
         const exigence = this.exigenceList[key];
