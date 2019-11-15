@@ -27,6 +27,20 @@
             {{value.name}}
           </td>
         </tr>
+        <tr class="not_filtered"
+            v-for="item in notFilteredCurrentElement"
+            :key="item[0]._id"
+            :class="{ 'active': selectedItemId === item[0]._id }"
+          >
+          <td
+              v-for="value in item"
+              :key="value._id"
+              :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+              @click="selectValue(value, item, currentElement.idTable)"
+            >
+            {{value.name}}
+          </td>
+        </tr>
       </table>
     </div>
   </div>
@@ -62,6 +76,13 @@ export default {
         return item.filter((value) => {
           return value.name.toLowerCase().includes(this.textSearch.toLowerCase());
         }).length > 0;
+      });
+    },
+    notFilteredCurrentElement() {
+      return this.currentElement.data.filter((item) => {
+        return item.filter((value) => {
+          return (!value.name.toLowerCase().includes(this.textSearch.toLowerCase()));
+        }).length === item.length;
       });
     },
   },
@@ -131,6 +152,9 @@ export default {
             transition: background-color 0.3s;
           }
         }
+      }
+      .not_filtered {
+        background-color: transparent;
       }
     }
   }
