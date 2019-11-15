@@ -4,10 +4,10 @@
       <div class="header">{{currentElement.title}}</div>
       <div class="searchbar">
         <input
-              type="text"
-              v-model="textSearch"
-              placeholder="Search"
-            />
+            type="text"
+            v-model="textSearch"
+            placeholder="search"
+          />
       </div>
       <table>
         <thead>
@@ -17,28 +17,29 @@
         </thead>
         <tbody>
           <tr
-              v-for="item in filteredCurrentElement"
-              :key="item[0]._id"
-              :class="{ 'active': selectedItemId === item[0]._id }"
+              v-for="(item, itemKey) in filteredCurrentElement"
+              :key="item[0]._id + itemKey"
+              :class="{ 'active': selectedItemId === item[0]._id + itemKey }"
             >
             <template v-for="value in item">
               <td
                   v-if="!value.url"
                   :key="value._id"
-                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-                  @click="selectValue(value, item, currentElement.idTable)"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
+                  @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
                 {{ value.name }}
               </td>
               <td
                   v-else
                   class="cell_url"
+                  colspan="1"
                   :key="value._id"
-                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                 >
                 <div
                     class="url_name"
-                    @click="selectValue(value, item, currentElement.idTable)"
+                    @click="selectValue(value, item, itemKey, currentElement.idTable)"
                   >
                   {{ value.name }}
                 </div>
@@ -50,29 +51,31 @@
               </td>
             </template>
           </tr>
-          <tr class="not_filtered"
-              v-for="item in notFilteredCurrentElement"
-              :key="item[0]._id"
-              :class="{ 'active': selectedItemId === item[0]._id }"
+          <tr
+              class="not_filtered"
+              v-for="(item, itemKey) in notFilteredCurrentElement"
+              :key="item[0]._id + itemKey"
+              :class="{ 'active': selectedItemId === item[0]._id + itemKey }"
             >
             <template v-for="value in item">
               <td
                   v-if="!value.url"
                   :key="value._id"
-                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-                  @click="selectValue(value, item, currentElement.idTable)"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
+                  @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
                 {{ value.name }}
               </td>
               <td
                   v-else
                   class="cell_url"
+                  colspan="1"
                   :key="value._id"
-                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                 >
                 <div
                     class="url_name"
-                    @click="selectValue(value, item, currentElement.idTable)"
+                    @click="selectValue(value, item, itemKey, currentElement.idTable)"
                   >
                   {{ value.name }}
                 </div>
@@ -95,6 +98,9 @@
 import { docUrl } from '@/constants';
 
 export default {
+  components: {
+  },
+
   docUrl,
 
   data() {
@@ -131,9 +137,9 @@ export default {
   },
 
   methods: {
-    selectValue(value, item, idTable) {
-      this.selectedItemId = item[0]._id;
-      this.selectedValueId = item[0]._id + value._id;
+    selectValue(value, item, itemKey, idTable) {
+      this.selectedItemId = item[0]._id + itemKey;
+      this.selectedValueId = item[0]._id + value._id + itemKey;
       this.$emit('callAPI', value, idTable);
     },
   },

@@ -205,20 +205,29 @@ utilRouter.post('/editon', (req, res) => {
     // DELETE
     cleanDB(req.mangodb).then(() => {
         // PUSH NEW OBJECTS
+        if (isEmpty(newExigenceList)) {
+            res.send([]);
+        }
         req.mangodb.collection(TYPES.EXIGENCE).insertMany(
             newExigenceList,
             (err, result) => {
                 if (err) throw err;
 
-                req.mangodb.collection(TYPES.RELATION).insertMany(
-                    newRelationList,
-                    (err, result) => {
-                        if (err) throw err;
-
-                        getExigencesWithRelations(req.mangodb).then(result => {
-                            res.send(result);
-                        });
+                if (isEmpty(newRelationList)) {
+                    getExigencesWithRelations(req.mangodb).then(result => {
+                        res.send(result);
                     });
+                } else {
+                    req.mangodb.collection(TYPES.RELATION).insertMany(
+                        newRelationList,
+                        (err, result) => {
+                            if (err) throw err;
+    
+                            getExigencesWithRelations(req.mangodb).then(result => {
+                                res.send(result);
+                            });
+                        });
+                }
             });
     });
 

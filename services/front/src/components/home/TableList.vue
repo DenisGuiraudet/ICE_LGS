@@ -7,16 +7,21 @@
 
 <script>
 import axios from 'axios';
+
 import Table from '@/components/home/Table.vue';
 import { backUrl, TYPES } from '@/constants';
 
 export default {
+  components: {
+    Table,
+  },
 
   data() {
     return {
       listElem: [],
     };
   },
+
   mounted() {
     axios
       .get(`${backUrl}/util/exigences_with_category`)
@@ -24,9 +29,7 @@ export default {
         this.newTable(response.data, 0);
       });
   },
-  components: {
-    Table,
-  },
+
   methods: {
     callAPI(value, idTable) {
       console.log(value.type);

@@ -111,7 +111,10 @@ export default {
 </script>
 
 <style scoped lang="scss">
+@import '@/style/constants';
+
 #relationExigence {
   flex: 1;
+  border-left: solid 3px $text-dark;
 }
 </style>

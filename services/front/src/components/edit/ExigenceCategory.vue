@@ -75,6 +75,7 @@
           >
           <font-awesome-icon icon="plus" />
         </div>
+        <div class="cell_action"></div>
       </div>
     </div>
   </div>
