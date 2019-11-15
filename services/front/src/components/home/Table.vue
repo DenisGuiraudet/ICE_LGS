@@ -58,12 +58,22 @@ export default {
   overflow-y: auto;
   min-width: max-content;
   .table-container-content {
+    position: relative;
     margin: 25px;
+    .header {
+      position: sticky;
+      top: 0;
+      left: 0;
+      background-color: $text-dark;
+      color: $text-light;
+      border: 1px white solid;
+      margin-bottom: 10px;
+      padding: 5px;
+    }
     table {
       border-collapse: collapse;
       background-color: white;
       width: 100%;
-      max-height: 500px;
       tr {
         &:nth-child(even) {
           background-color: #f2f2f2;
@@ -81,23 +91,18 @@ export default {
         th {
           padding-top: 12px;
           padding-bottom: 12px;
-          text-align: left;
-          background-color: #4CAF50;
           color: white;
+          background-color: #4CAF50;
+          text-align: center;
         }
-        td:hover {
-          background-color: darken(lightgoldenrodyellow, 10%);
-          transition: background-color 0.3s;
+        td {
           cursor: pointer;
+          &:hover {
+            background-color: darken(lightgoldenrodyellow, 10%);
+            transition: background-color 0.3s;
+          }
         }
       }
-    }
-    .header {
-        background-color: $text-dark;
-        color: $text-light;
-        border: 1px white solid;
-        margin-bottom: 10px;
-        padding: 5px;
     }
   }
 }
