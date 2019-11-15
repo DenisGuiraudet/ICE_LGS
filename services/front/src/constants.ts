@@ -1,6 +1,8 @@
 
 export const backUrl = 'http://localhost:3000';
 
+export const docUrl = 'https://mi-git.univ-tlse2.fr/ECb/LGS';
+
 export const TYPES = {
   CATEGORY: 'CATEGORY',
   EXIGENCE: 'EXIGENCE',

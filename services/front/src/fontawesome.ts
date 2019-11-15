@@ -2,6 +2,7 @@ import { library } from '@fortawesome/fontawesome-svg-core';
 import {
   faIgloo,
   faPen,
+  faExternalLinkAlt,
   faChevronDown,
   faChevronUp,
   faSave,
@@ -15,6 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
 library.add(faIgloo);
 library.add(faPen);
+library.add(faExternalLinkAlt);
 library.add(faChevronDown);
 library.add(faChevronUp);
 library.add(faSave);

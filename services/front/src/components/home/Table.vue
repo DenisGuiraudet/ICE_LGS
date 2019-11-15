@@ -18,28 +18,68 @@
             :key="item[0]._id"
             :class="{ 'active': selectedItemId === item[0]._id }"
           >
-          <td
-              v-for="value in item"
-              :key="value._id"
-              :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-              @click="selectValue(value, item, currentElement.idTable)"
-            >
-            {{value.name}}
-          </td>
+          <template v-for="value in item">
+            <td
+                v-if="!value.url"
+                :key="value._id"
+                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+                @click="selectValue(value, item, currentElement.idTable)"
+              >
+              {{ value.name }}
+            </td>
+            <td
+                v-else
+                class="cell_url"
+                :key="value._id"
+                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+              >
+              <div
+                  class="url_name"
+                  @click="selectValue(value, item, currentElement.idTable)"
+                >
+                {{ value.name }}
+              </div>
+              <div class="url_link">
+                <a :href="$options.docUrl + value.url">
+                  <font-awesome-icon icon="external-link-alt" />
+                </a>
+              </div>
+            </td>
+          </template>
         </tr>
         <tr class="not_filtered"
             v-for="item in notFilteredCurrentElement"
             :key="item[0]._id"
             :class="{ 'active': selectedItemId === item[0]._id }"
           >
-          <td
-              v-for="value in item"
-              :key="value._id"
-              :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-              @click="selectValue(value, item, currentElement.idTable)"
-            >
-            {{value.name}}
-          </td>
+          <template v-for="value in item">
+            <td
+                v-if="!value.url"
+                :key="value._id"
+                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+                @click="selectValue(value, item, currentElement.idTable)"
+              >
+              {{ value.name }}
+            </td>
+            <td
+                v-else
+                class="cell_url"
+                :key="value._id"
+                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+              >
+              <div
+                  class="url_name"
+                  @click="selectValue(value, item, currentElement.idTable)"
+                >
+                {{ value.name }}
+              </div>
+              <div class="url_link">
+                <a :href="$options.docUrl + value.url">
+                  <font-awesome-icon icon="external-link-alt" />
+                </a>
+              </div>
+            </td>
+          </template>
         </tr>
       </table>
     </div>
@@ -48,8 +88,11 @@
 
 
 <script>
+import { docUrl } from '@/constants';
 
 export default {
+  docUrl,
+
   data() {
     return {
       textSearch: '',
@@ -58,18 +101,14 @@ export default {
       selectedValueId: null,
     };
   },
+
   props: {
     currentElement: {
       type: Object,
     },
   },
-  methods: {
-    selectValue(value, item, idTable) {
-      this.selectedItemId = item[0]._id;
-      this.selectedValueId = item[0]._id + value._id;
-      this.$emit('callAPI', value, idTable);
-    },
-  },
+
+
   computed: {
     filteredCurrentElement() {
       return this.currentElement.data.filter((item) => {
@@ -84,6 +123,14 @@ export default {
           return (!value.name.toLowerCase().includes(this.textSearch.toLowerCase()));
         }).length === item.length;
       });
+    },
+  },
+
+  methods: {
+    selectValue(value, item, idTable) {
+      this.selectedItemId = item[0]._id;
+      this.selectedValueId = item[0]._id + value._id;
+      this.$emit('callAPI', value, idTable);
     },
   },
 };
@@ -150,11 +197,44 @@ export default {
           text-align: center;
         }
         td {
+          max-width: 200px;
           cursor: pointer;
+              transition: background-color 0.3s;
           &.active,
           &:hover {
-            background-color: darken(lightgoldenrodyellow, 10%);
-            transition: background-color 0.3s;
+            &:not(.cell_url) {
+              background-color: darken(lightgoldenrodyellow, 10%);
+            }
+          }
+          &.cell_url {
+            display: flex;
+            flex-direction: row;
+            padding: 0;
+            &.active .url_name {
+                background-color: darken(lightgoldenrodyellow, 10%);
+            }
+            .url_name,
+            .url_link {
+              transition: background-color 0.3s;
+              &:hover {
+                background-color: darken(lightgoldenrodyellow, 10%);
+              }
+            }
+            .url_name {
+              flex: 1;
+              padding: 8px;
+            }
+            .url_link {
+              display: flex;
+              a {
+                display: flex;
+                padding: 8px;
+                color: $text-dark;
+                svg {
+                  margin: auto;
+                }
+              }
+            }
           }
         }
       }
