@@ -7,8 +7,9 @@ import {
   faSave,
   faDownload,
   faCloudUploadAlt,
-  faDumpster,
+  faToilet,
   faHandPointRight,
+  faPlus,
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 
@@ -19,7 +20,8 @@ library.add(faChevronUp);
 library.add(faSave);
 library.add(faDownload);
 library.add(faCloudUploadAlt);
-library.add(faDumpster);
+library.add(faToilet);
 library.add(faHandPointRight);
+library.add(faPlus);
 
 export default FontAwesomeIcon;

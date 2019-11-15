@@ -79,6 +79,9 @@ export default {
       .line {
         display: flex;
         flex-direction: row;
+        &.active * {
+          background-color: lightgoldenrodyellow;
+        }
         .cell {
           line-height: 35px;
           flex: 1;
@@ -103,15 +106,25 @@ export default {
     .cell_action {
       line-height: 35px;
       width: 35px;
-      &.action_erase,
-      &.action_select {
         border: solid 1px darkgray;
-      }
+      cursor: pointer;
       &.action_erase {
-        background: red;
+        background-color: red;
+        &:hover {
+          background-color: lighten(red, 10%);
+        }
       }
       &.action_select {
-        background: blueviolet;
+        background-color: blueviolet;
+        &:hover {
+          background-color: lighten(blueviolet, 10%);
+        }
+      }
+      &.action_add {
+        background-color: green;
+        &:hover {
+          background-color: lighten(green, 10%);
+        }
       }
     }
   }

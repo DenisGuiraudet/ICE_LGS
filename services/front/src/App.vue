@@ -44,6 +44,7 @@ body {
   color: $text-dark;
   & > *:not(.navbar) {
     flex: 1;
+    max-height: calc(100vh - 50px);
   }
 }
 </style>

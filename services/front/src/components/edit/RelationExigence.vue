@@ -31,34 +31,43 @@
             </select>
           </div>
           <div class="cell">
-            <input
-                type="text"
-                v-model="relation.exigence_2_id"
-                text="relation.exigence_1_id"
-                list="exigences"
-              >
-            <datalist id="exigences">
+            <select v-model="relation.exigence_2_id">
               <option
-                  v-for="exigeneItem in exigenceList"
-                  :key="exigeneItem._id"
-                  :value="exigeneItem._id"
+                  disabled
+                  :value="null"
+                />
+              <option
+                  v-for="exigenceItem in exigenceList"
+                  :key="exigenceItem._id"
+                  :value="exigenceItem._id"
                 >
-                {{ exigeneItem.name }}
+                {{ exigenceItem.name }}
               </option>
-            </datalist>
+            </select>
           </div>
         </div>
       </template>
     </div>
-    <div>
+    <div v-if="selectedExigence">
       <div class="line_action"></div>
       <div
           class="line_action"
-          v-for="relation in selectedExigence.relations"
+          v-for="(relation, relationKey) in selectedExigence.relations"
           :key="relation._id"
         >
-        <div class="cell_action action_erase">
-          <font-awesome-icon icon="dumpster" />
+        <div
+            class="cell_action action_erase"
+            @click="eraseRelation(relationKey)"
+          >
+          <font-awesome-icon icon="toilet" />
+        </div>
+      </div>
+      <div class="line_action">
+        <div
+            class="cell_action action_add"
+            @click="addRelation()"
+          >
+          <font-awesome-icon icon="plus" />
         </div>
       </div>
     </div>
@@ -66,6 +75,7 @@
 </template>
 
 <script>
+import { newRelation } from '@/helper/util';
 import { TYPES, RELATION_TYPES } from '@/constants';
 
 
@@ -88,6 +98,12 @@ export default {
   },
 
   methods: {
+    eraseRelation(relationKey) {
+      this.selectedExigence.relations.splice(relationKey, 1);
+    },
+    addRelation() {
+      this.selectedExigence.relations.push(newRelation(this.selectedExigence._id));
+    },
   },
 
 };

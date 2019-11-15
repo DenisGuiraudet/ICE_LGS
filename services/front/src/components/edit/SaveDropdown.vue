@@ -2,7 +2,7 @@
   <div id="saveDropdown">
     <div
         v-if="!opened"
-        class="save_icon"
+        class="save_icon icon_dropdown"
         @click="switchOpened"
       >
       <font-awesome-icon icon="chevron-down" />
@@ -27,7 +27,7 @@
         <font-awesome-icon icon="cloud-upload-alt" />
       </div>
       <div
-          class="save_icon"
+          class="save_icon icon_dropdown"
           @click="switchOpened"
         >
         <font-awesome-icon icon="chevron-up" />
@@ -131,6 +131,9 @@ export default {
     }
     &.icon_first {
       border-bottom: solid 1px $text-dark;
+    }
+    &.icon_dropdown {
+    line-height: 35px;
     }
   }
   .input_file {
