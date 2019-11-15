@@ -25,9 +25,11 @@ MongoClient.connect(
     const mongodb = client.db(MONGO.DB)
 
     // Fake data
+    /*
     cleanDB(mongodb).then(() => {
       addFakeData(mongodb)
     })
+    */
 
     app.use(express.json())
 
