@@ -140,18 +140,21 @@ export default {
       cursor: pointer;
       transition: background-color 0.2s;
       &.action_erase {
+        background-color: rgba(red, 0.15);
         &:hover {
-          background-color: lighten(red, 10%);
+          background-color: rgba(red, 0.7);
         }
       }
       &.action_select {
+        background-color: rgba(blueviolet, 0.15);
         &:hover {
-          background-color: lighten(blueviolet, 10%);
+          background-color: rgba(blueviolet, 0.7);
         }
       }
       &.action_add {
+        background-color: rgba(green, 0.15);
         &:hover {
-          background-color: lighten(green, 10%);
+          background-color: rgba(green, 0.7);
         }
       }
     }
