@@ -40,6 +40,7 @@
                   v-for="exigenceItem in exigenceList"
                   :key="exigenceItem._id"
                   :value="exigenceItem._id"
+                  :disabled="exigenceItem._id === selectedExigence._id"
                 >
                 {{ exigenceItem.name }}
               </option>
