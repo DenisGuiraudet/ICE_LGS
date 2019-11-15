@@ -179,11 +179,17 @@ export default {
         &.not_filtered {
           background-color: rgba(white, 0.3);
           color:white;
+          td.cell_url .url_link a {
+          color:white;
+          }
         }
         &.active,
         &:hover {
           background-color: lightgoldenrodyellow;
           color: $text-dark;
+          td.cell_url .url_link a {
+            color: $text-dark;
+          }
         }
         td, th {
           border: 1px solid #ddd;
