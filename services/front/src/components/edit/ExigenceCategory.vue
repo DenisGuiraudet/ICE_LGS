@@ -45,6 +45,7 @@
           class="line_action"
           v-for="(exigence, exigenceKey) in exigenceList"
           :key="exigence._id"
+          :class="{ 'active': selectedExigence && selectedExigence._id === exigence._id }"
         >
         <div
             class="cell_action action_erase"

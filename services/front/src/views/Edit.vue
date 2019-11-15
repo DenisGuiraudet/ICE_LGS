@@ -61,6 +61,8 @@ export default {
 </script>
 
 <style lang="scss">
+@import '@/style/constants';
+
 #edit {
   position: relative;
   display: flex;
@@ -72,6 +74,7 @@ export default {
     max-width: 50%;
     overflow-x: scroll;
     .edit_table {
+      position: relative;
       flex: 1;
       display: flex;
       flex-direction: column;
@@ -79,8 +82,12 @@ export default {
       .line {
         display: flex;
         flex-direction: row;
-        &.active * {
-          background-color: lightgoldenrodyellow;
+        margin-bottom: 3px;
+        &.active {
+          input,
+          select {
+            background-color: lightgoldenrodyellow;
+          }
         }
         .cell {
           line-height: 35px;
@@ -93,9 +100,20 @@ export default {
             padding: 0;
           }
           input {
-            border: 0;
+            width: calc(100% - 4px);
+            height: calc(100% - 4px);
+            margin: 1px;
+            border: solid 1px $text-dark;
+            border-radius:4px;
           }
         }
+      }
+      .title {
+        position: sticky;
+        padding-top: 3px;
+        top: 0;
+        left: 0;
+        background-color: white;
       }
     }
   }
@@ -103,25 +121,35 @@ export default {
     display: flex;
     flex-direction: row;
     height: 35px;
+    margin-bottom: 3px;
+    &:first-child {
+      position: sticky;
+      padding-top: 3px;
+      top: 0;
+      left: 0;
+      background-color: white;
+    }
+    &.active {
+      background-color: lightgoldenrodyellow;
+    }
     .cell_action {
       line-height: 35px;
       width: 35px;
-        border: solid 1px darkgray;
+      border-radius: 30%;
+      background-color: transparent;
       cursor: pointer;
+      transition: background-color 0.2s;
       &.action_erase {
-        background-color: red;
         &:hover {
           background-color: lighten(red, 10%);
         }
       }
       &.action_select {
-        background-color: blueviolet;
         &:hover {
           background-color: lighten(blueviolet, 10%);
         }
       }
       &.action_add {
-        background-color: green;
         &:hover {
           background-color: lighten(green, 10%);
         }
