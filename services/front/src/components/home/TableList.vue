@@ -72,6 +72,7 @@ export default {
 #tabList {
   display: flex;
   flex-wrap: nowrap;
+  height: 100%;
   overflow-x: auto;
 }
 </style>
