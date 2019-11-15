@@ -50,7 +50,6 @@
 import axios from 'axios';
 import fileDownload from 'js-file-download';
 import moment from 'moment';
-import VueIziToast from 'vue-izitoast';
 import { CollapseTransition } from 'vue2-transitions';
 
 import { backUrl, success } from '@/constants';
@@ -85,7 +84,7 @@ export default {
         )
         .then((response) => {
           this.$emit('exigenceListChanged', response.data);
-          VueIziToast.success('Données enregistrées!', 'OK', success);
+          this.$toast.success('Données enregistrées!', 'OK', success);
         });
     },
     download() {
@@ -108,7 +107,7 @@ export default {
           )
           .then((response) => {
             this.$emit('exigenceListChanged', response.data);
-            VueIziToast.success('Données transférées', 'OK', this.success);
+            this.$toast.success('Données transférées', 'OK', this.success);
           });
       };
       reader.onerror = (evt) => {

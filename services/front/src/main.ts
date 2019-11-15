@@ -5,9 +5,13 @@ import FontAwesomeIcon from './fontawesome';
 import router from './router';
 import store from './store';
 
-import 'izitoast/dist/css/iziToast.min.css';
+import 'izitoast/dist/css/iziToast.css';
+
+const VueIziToast = require('vue-izitoast');
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
+Vue.use(VueIziToast);
 
 Vue.config.productionTip = false;
 
