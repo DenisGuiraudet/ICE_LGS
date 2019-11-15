@@ -33,7 +33,6 @@
               <td
                   v-else
                   class="cell_url"
-                  colspan="1"
                   :key="value._id"
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                 >
@@ -71,7 +70,6 @@
               <td
                   v-else
                   class="cell_url"
-                  colspan="1"
                   :key="value._id"
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                 >
