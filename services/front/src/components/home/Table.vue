@@ -10,77 +10,81 @@
             />
       </div>
       <table>
-        <tr>
-          <th v-for="(type, typeKey) in currentElement.types" :key="typeKey">{{type}}</th>
-        </tr>
-        <tr
-            v-for="item in filteredCurrentElement"
-            :key="item[0]._id"
-            :class="{ 'active': selectedItemId === item[0]._id }"
-          >
-          <template v-for="value in item">
-            <td
-                v-if="!value.url"
-                :key="value._id"
-                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-                @click="selectValue(value, item, currentElement.idTable)"
-              >
-              {{ value.name }}
-            </td>
-            <td
-                v-else
-                class="cell_url"
-                :key="value._id"
-                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-              >
-              <div
-                  class="url_name"
+        <thead>
+          <tr>
+            <th v-for="(type, typeKey) in currentElement.types" :key="typeKey">{{type}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr
+              v-for="item in filteredCurrentElement"
+              :key="item[0]._id"
+              :class="{ 'active': selectedItemId === item[0]._id }"
+            >
+            <template v-for="value in item">
+              <td
+                  v-if="!value.url"
+                  :key="value._id"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
                   @click="selectValue(value, item, currentElement.idTable)"
                 >
                 {{ value.name }}
-              </div>
-              <div class="url_link">
-                <a :href="$options.docUrl + value.url">
-                  <font-awesome-icon icon="external-link-alt" />
-                </a>
-              </div>
-            </td>
-          </template>
-        </tr>
-        <tr class="not_filtered"
-            v-for="item in notFilteredCurrentElement"
-            :key="item[0]._id"
-            :class="{ 'active': selectedItemId === item[0]._id }"
-          >
-          <template v-for="value in item">
-            <td
-                v-if="!value.url"
-                :key="value._id"
-                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-                @click="selectValue(value, item, currentElement.idTable)"
-              >
-              {{ value.name }}
-            </td>
-            <td
-                v-else
-                class="cell_url"
-                :key="value._id"
-                :class="{ 'active': selectedValueId === item[0]._id + value._id }"
-              >
-              <div
-                  class="url_name"
+              </td>
+              <td
+                  v-else
+                  class="cell_url"
+                  :key="value._id"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+                >
+                <div
+                    class="url_name"
+                    @click="selectValue(value, item, currentElement.idTable)"
+                  >
+                  {{ value.name }}
+                </div>
+                <div class="url_link">
+                  <a :href="$options.docUrl + value.url">
+                    <font-awesome-icon icon="external-link-alt" />
+                  </a>
+                </div>
+              </td>
+            </template>
+          </tr>
+          <tr class="not_filtered"
+              v-for="item in notFilteredCurrentElement"
+              :key="item[0]._id"
+              :class="{ 'active': selectedItemId === item[0]._id }"
+            >
+            <template v-for="value in item">
+              <td
+                  v-if="!value.url"
+                  :key="value._id"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
                   @click="selectValue(value, item, currentElement.idTable)"
                 >
                 {{ value.name }}
-              </div>
-              <div class="url_link">
-                <a :href="$options.docUrl + value.url">
-                  <font-awesome-icon icon="external-link-alt" />
-                </a>
-              </div>
-            </td>
-          </template>
-        </tr>
+              </td>
+              <td
+                  v-else
+                  class="cell_url"
+                  :key="value._id"
+                  :class="{ 'active': selectedValueId === item[0]._id + value._id }"
+                >
+                <div
+                    class="url_name"
+                    @click="selectValue(value, item, currentElement.idTable)"
+                  >
+                  {{ value.name }}
+                </div>
+                <div class="url_link">
+                  <a :href="$options.docUrl + value.url">
+                    <font-awesome-icon icon="external-link-alt" />
+                  </a>
+                </div>
+              </td>
+            </template>
+          </tr>
+        </tbody>
       </table>
     </div>
   </div>
@@ -171,6 +175,10 @@ export default {
     table {
       border-collapse: collapse;
       width: 100%;
+      thead {
+        position: sticky;
+        top: 52px;
+      }
       tr {
         background-color: white;
         &:nth-child(even) {
