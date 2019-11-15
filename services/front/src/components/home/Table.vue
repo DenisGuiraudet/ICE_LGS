@@ -14,7 +14,7 @@
           <th v-for="(type, typeKey) in currentElement.types" :key="typeKey">{{type}}</th>
         </tr>
         <tr
-            v-for="item in currentElement.data"
+            v-for="item in filteredCurrentElement"
             :key="item[0]._id"
             :class="{ 'active': selectedItemId === item[0]._id }"
           >
@@ -58,14 +58,11 @@ export default {
   },
   computed: {
     filteredCurrentElement() {
-      return this.currentElement.data.filter((text) => {
-        const itemsFiltered = [];
-        for (items in this.currentElement.data) {
-          if (items.name.includes(text)) {
-            itemsFiltered.push(items);
-          }
-        }
-        return itemsFiltered;
+      return this.currentElement.data.filter((item) => {
+        return item.filter((value) => {
+          console.log(value.name, this.textSearch, value.name.includes(this.textSearch));
+          return value.name.includes(this.textSearch);
+        });
       });
     },
   },
