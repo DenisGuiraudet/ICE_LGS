@@ -37,16 +37,18 @@
                   :key="value._id"
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                 >
-                <div
-                    class="url_name"
-                    @click="selectValue(value, item, itemKey, currentElement.idTable)"
-                  >
-                  {{ value.name }}
-                </div>
-                <div class="url_link">
-                  <a :href="$options.docUrl + value.url">
-                    <font-awesome-icon icon="external-link-alt" />
-                  </a>
+                <div class="cell_url_container">
+                  <div
+                      class="url_name"
+                      @click="selectValue(value, item, itemKey, currentElement.idTable)"
+                    >
+                    {{ value.name }}
+                  </div>
+                  <div class="url_link">
+                    <a :href="$options.docUrl + value.url">
+                      <font-awesome-icon icon="external-link-alt" />
+                    </a>
+                  </div>
                 </div>
               </td>
             </template>
@@ -73,16 +75,18 @@
                   :key="value._id"
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                 >
-                <div
-                    class="url_name"
-                    @click="selectValue(value, item, itemKey, currentElement.idTable)"
-                  >
-                  {{ value.name }}
-                </div>
-                <div class="url_link">
-                  <a :href="$options.docUrl + value.url">
-                    <font-awesome-icon icon="external-link-alt" />
-                  </a>
+                <div class="cell_url_container">
+                  <div
+                      class="url_name"
+                      @click="selectValue(value, item, itemKey, currentElement.idTable)"
+                    >
+                    {{ value.name }}
+                  </div>
+                  <div class="url_link">
+                    <a :href="$options.docUrl + value.url">
+                      <font-awesome-icon icon="external-link-alt" />
+                    </a>
+                  </div>
                 </div>
               </td>
             </template>
@@ -227,9 +231,11 @@ export default {
             }
           }
           &.cell_url {
-            display: flex;
-            flex-direction: row;
             padding: 0;
+            .cell_url_container {
+              display: flex;
+              flex-direction: row;
+            }
             &.active .url_name {
                 background-color: darken(lightgoldenrodyellow, 10%);
             }
