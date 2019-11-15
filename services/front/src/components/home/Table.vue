@@ -123,15 +123,20 @@ export default {
     }
     table {
       border-collapse: collapse;
-      background-color: white;
       width: 100%;
       tr {
+        background-color: white;
         &:nth-child(even) {
           background-color: #f2f2f2;
+        }
+        &.not_filtered {
+          background-color: rgba(white, 0.3);
+          color:white;
         }
         &.active,
         &:hover {
           background-color: lightgoldenrodyellow;
+          color: $text-dark;
         }
         td, th {
           border: 1px solid #ddd;
@@ -152,9 +157,6 @@ export default {
             transition: background-color 0.3s;
           }
         }
-      }
-      .not_filtered {
-        background-color: transparent;
       }
     }
   }
