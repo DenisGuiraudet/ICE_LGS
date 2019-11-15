@@ -9,7 +9,7 @@ export function newExigence() {
     type: TYPES.EXIGENCE,
     name: '',
     category: null,
-    relations: []
+    relations: [],
   };
 };
 
@@ -19,6 +19,6 @@ export function newRelation(exigence_1_id: String) {
     type: TYPES.RELATION,
     name: '',
     exigence_1_id,
-    exigence_2_id: null
+    exigence_2_id: null,
   };
 };
