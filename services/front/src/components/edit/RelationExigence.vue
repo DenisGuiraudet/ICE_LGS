@@ -111,4 +111,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+#relationExigence {
+  flex: 1;
+}
 </style>

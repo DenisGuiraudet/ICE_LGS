@@ -5,6 +5,7 @@
         <div class="cell">
           {{ $options.TYPES.EXIGENCE }}
         </div>
+        <div class="cell">URL</div>
         <div class="cell">
           {{ $options.TYPES.CATEGORY }}
         </div>
@@ -20,6 +21,13 @@
               type="text"
               v-model="exigence.name"
               placeholder="name"
+            />
+        </div>
+        <div class="cell">
+          <input
+              type="text"
+              v-model="exigence.url"
+              placeholder="url"
             />
         </div>
         <div class="cell">
@@ -128,4 +136,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
+#exigenceCategory {
+  flex: 2;
+}
 </style>

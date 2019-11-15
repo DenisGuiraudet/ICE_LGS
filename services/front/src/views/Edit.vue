@@ -68,10 +68,8 @@ export default {
   display: flex;
   flex-direction: row;
   .edit_container {
-    flex: 1;
     display: flex;
     flex-direction: row;
-    max-width: 50%;
     overflow-x: scroll;
     .edit_table {
       position: relative;

@@ -8,6 +8,7 @@ export function newExigence() {
     _id: uuidv4(),
     type: TYPES.EXIGENCE,
     name: '',
+    url: '',
     category: null,
     relations: [],
   };

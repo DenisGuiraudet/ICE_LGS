@@ -73,7 +73,7 @@ Edition:
 | --- | --- | --- | --- | --- |
 | | GET | /exigence/:id | | Exigence |
 | | GET | /exigence/all | | Exigence List |
-| | POST | /exigence/new | `name`, `category` | Exigence |
+| | POST | /exigence/new | `name`, `url`, `category` | Exigence |
 
 #### Relation
 

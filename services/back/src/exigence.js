@@ -23,7 +23,9 @@ exigenceRouter.post('/new', (req, res) => {
     req.mangodb.collection(TYPES.EXIGENCE).insertOne(
         {
             type: TYPES.EXIGENCE,
-            name: req.body.name
+            name: req.body.name,
+            url: req.body.url,
+            category: req.body.category
         },
         (err, result) => {
             if (err) throw err;

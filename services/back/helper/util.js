@@ -50,12 +50,14 @@ export function addFakeData(mangodb) {
         _id: 'exigence_id_1',
         type: TYPES.EXIGENCE,
         name: 'Choux Fleur',
+        url: '/',
         category: CATEGORY_TYPES.LIMIT
       },
       {
         _id: 'exigence_id_2',
         type: TYPES.EXIGENCE,
         name: 'Oui mais Non',
+        url: '/',
         category: CATEGORY_TYPES.TASK
       }
     ],
