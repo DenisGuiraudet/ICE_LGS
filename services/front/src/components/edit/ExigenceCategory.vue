@@ -99,7 +99,7 @@ export default {
     eraseExigence(exigenceKey) {
       const exigenceId = this.exigenceList[exigenceKey]._id;
 
-      if (exigenceId === this.selectedExigence._id) {
+      if (this.selectedExigence && this.selectedExigence._id === exigenceId) {
         this.$emit('selectExigence', null);
       }
 

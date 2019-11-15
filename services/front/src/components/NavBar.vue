@@ -2,7 +2,7 @@
   <div class="navbar">
     <h1>ICE_LGS by Denis GUIRAUDET & Matthieu ORRIERE</h1>
     <router-link
-        v-if="$route.path == '/edit'"
+        v-if="$route.path === '/edit'"
         class="navbar_action"
         to="/"
       >
