@@ -2,6 +2,13 @@
   <div class="table-container">
     <div class="table-container-content">
       <div class="header">{{this.currentElement.title}}</div>
+      <div class="searchbar">
+        <input
+              type="text"
+              v-model="this.textSearch"
+              placeholder="Search"
+            />
+      </div>
       <table>
         <tr>
           <th v-for="(type, typeKey) in this.currentElement.types" :key="typeKey">{{type}}</th>
@@ -30,8 +37,7 @@
 export default {
   data() {
     return {
-      typeData: '',
-      selectedItemId: null,
+      textSearch: '',
     };
   },
   props: {
@@ -39,12 +45,17 @@ export default {
       type: Object,
     },
   },
-
-  methods: {
-    selectValue(value, item, idTable) {
-      console.log(item);
-      this.selectedItemId = item[0]._id;
-      this.$emit('callAPI', value, idTable);
+  computed: {
+    filteredCurrentElement() {
+      return this.currentElement.data.filter((text) => {
+        const itemsFiltered = [];
+        for (items in this.currentElement.data) {
+          if (items.name.includes(text)) {
+            itemsFiltered.push(items);
+          }
+        }
+        return itemsFiltered;
+      });
     },
   },
 };
@@ -102,6 +113,19 @@ export default {
             transition: background-color 0.3s;
           }
         }
+      }
+    }
+    .header {
+        background-color: $text-dark;
+        color: $text-light;
+        border: 1px white solid;
+        margin-bottom: 10px;
+        padding: 5px;
+    }
+    .searchbar{
+      margin-bottom: 10px;
+      input {
+        width: calc(100% -  10px);
       }
     }
   }
