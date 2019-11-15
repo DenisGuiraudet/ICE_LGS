@@ -38,11 +38,19 @@ export default {
   data() {
     return {
       textSearch: '',
+      typeData: '',
+      selectedItemId: null,
     };
   },
   props: {
     currentElement: {
       type: Object,
+    },
+  },
+  methods: {
+    selectValue(value, item, idTable) {
+      this.selectedItemId = item[0]._id;
+      this.$emit('callAPI', value, idTable);
     },
   },
   computed: {
@@ -81,6 +89,12 @@ export default {
       margin-bottom: 10px;
       padding: 5px;
     }
+    .searchbar{
+      margin-bottom: 10px;
+      input {
+        width: calc(100% -  10px);
+      }
+    }
     table {
       border-collapse: collapse;
       background-color: white;
@@ -113,19 +127,6 @@ export default {
             transition: background-color 0.3s;
           }
         }
-      }
-    }
-    .header {
-        background-color: $text-dark;
-        color: $text-light;
-        border: 1px white solid;
-        margin-bottom: 10px;
-        padding: 5px;
-    }
-    .searchbar{
-      margin-bottom: 10px;
-      input {
-        width: calc(100% -  10px);
       }
     }
   }
