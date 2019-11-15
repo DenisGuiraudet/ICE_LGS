@@ -176,7 +176,6 @@ utilRouter.post('/editon', (req, res) => {
                 _id: exigence._id,
                 type: TYPES.EXIGENCE,
                 name: exigence.name,
-                slug: exigence.name,
                 category: exigence.category
             });
         }

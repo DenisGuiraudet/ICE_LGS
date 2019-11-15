@@ -7,8 +7,7 @@ export function newExigence() {
   return {
     _id: uuidv4(),
     type: TYPES.EXIGENCE,
-    name: 'exigence.name',
-    slug: 'exigence.name',
+    name: '',
     category: null,
     relations: []
   };

@@ -17,7 +17,6 @@ Object:
     _id: String,
     type: "EXIGENCE",
     name: String,
-    slug: String,
     category: String
 }
 ```
