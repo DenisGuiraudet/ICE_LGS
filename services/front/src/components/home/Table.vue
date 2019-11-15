@@ -60,9 +60,8 @@ export default {
     filteredCurrentElement() {
       return this.currentElement.data.filter((item) => {
         return item.filter((value) => {
-          console.log(value.name, this.textSearch, value.name.includes(this.textSearch));
-          return value.name.includes(this.textSearch);
-        });
+          return value.name.toLowerCase().includes(this.textSearch.toLowerCase());
+        }).length > 0;
       });
     },
   },
