@@ -5,6 +5,8 @@ import FontAwesomeIcon from './fontawesome';
 import router from './router';
 import store from './store';
 
+import 'izitoast/dist/css/iziToast.min.css';
+
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.config.productionTip = false;
