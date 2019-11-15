@@ -92,7 +92,10 @@ export default {
     .searchbar{
       margin-bottom: 10px;
       input {
-        width: calc(100% -  10px);
+        width: calc(100% -  8px);
+        padding: 3px;
+        border: solid 1px $text-dark;
+        border-radius:4px;
       }
     }
     table {
