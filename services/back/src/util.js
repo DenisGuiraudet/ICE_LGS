@@ -1,7 +1,8 @@
 import { Router } from 'express';
+import { isEmpty } from 'underscore';
 
 import { getExigenceFromId } from '../helper/exigence';
-import { cleanDB } from '../helper/util';
+import { cleanDB, getExigencesWithRelations } from '../helper/util';
 import { TYPES } from '../constants';
 
 
@@ -22,12 +23,14 @@ utilRouter.get('/exigences_with_category', (req, res) => {
                 newResult.push([
                     exigence,
                     {
+                        type: TYPES.CATEGORY,
                         name: exigence.category
                     }
                 ])
             }
 
             res.send({
+                title: '*',
                 types: [ TYPES.EXIGENCE, TYPES.CATEGORY ],
                 data: newResult
             });
@@ -42,9 +45,18 @@ utilRouter.get('/exigences_from_category_name/:name', (req, res) => {
     ).toArray(
         (err, result) => {
             if (err) throw err;
+
+            let newResult = [];
+
+            for (const key in result) {
+                let exigence = result[key];
+                newResult.push([ exigence ]);
+            }
+
             res.send({
+                title: `${TYPES.CATEGORY}: ${req.params.name}`,
                 types: [ TYPES.EXIGENCE ],
-                data: result
+                data: newResult
             });
         });
 });
@@ -67,13 +79,13 @@ utilRouter.get('/relations_from_exigence/:id', (req, res) => {
                         let relation = result[key];
         
                         newResult.push([
-                            await getExigenceFromId(req, relation.exigence_1_id),
+                            await getExigenceFromId(req.mangodb, relation.exigence_1_id),
                             relation,
-                            await getExigenceFromId(req, relation.exigence_2_id)
+                            await getExigenceFromId(req.mangodb, relation.exigence_2_id)
                         ])
                     }
 
-                    resolve();
+                    resolve(newResult);
                 });
         }),
         new Promise(resolve => {
@@ -89,17 +101,19 @@ utilRouter.get('/relations_from_exigence/:id', (req, res) => {
                         let relation = result[key];
         
                         newResult.push([
-                            await getExigenceFromId(req, relation.exigence_1_id),
+                            await getExigenceFromId(req.mangodb, relation.exigence_1_id),
                             relation,
-                            await getExigenceFromId(req, relation.exigence_2_id)
+                            await getExigenceFromId(req.mangodb, relation.exigence_2_id)
                         ])
                     }
 
-                    resolve();
+                    resolve(newResult);
                 });
-        })
-    ]).then(() => {
+        }),
+        getExigenceFromId(req.mangodb, req.params.id)
+    ]).then(result => {
         res.send({
+            title: `${TYPES.EXIGENCE}: ${result[2].name}`,
             types: [ TYPES.EXIGENCE, TYPES.RELATION, TYPES.EXIGENCE ],
             data: newResult
         });
@@ -122,12 +136,13 @@ utilRouter.get('/relations_exigences_from_relation_name/:name', (req, res) => {
                 let relation = result[key];
 
                 newResult.push([
-                    await getExigenceFromId(req, relation.exigence_1_id),
-                    await getExigenceFromId(req, relation.exigence_2_id)
+                    await getExigenceFromId(req.mangodb, relation.exigence_1_id),
+                    await getExigenceFromId(req.mangodb, relation.exigence_2_id)
                 ])
             }
 
             res.send({
+                title: `${TYPES.RELATION}: ${req.params.name}`,
                 types: [ TYPES.EXIGENCE, TYPES.EXIGENCE ],
                 data: newResult
             });
@@ -138,31 +153,9 @@ utilRouter.get('/relations_exigences_from_relation_name/:name', (req, res) => {
 // EDIT
 
 utilRouter.get('/editon', (req, res) => {
-    req.mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
-        (err, result) => {
-            if (err) throw err;
-
-            let newResult = [];
-
-            for (const key in result) {
-                let exigence = result[key];
-
-                req.mangodb.collection(TYPES.RELATION).find(
-                        {
-                            exigence_1_id: exigence._id
-                        }
-                    ).toArray(
-                        (err, resultRelation) => {
-                            if (err) throw err;
-
-                            exigence.relations = resultRelation;
-                        });
-
-                newResult.push(exigence);
-            }
-
-            res.send(newResult);
-        });
+    getExigencesWithRelations(req.mangodb).then(result => {
+        res.send(result);
+    });
 });
 
 utilRouter.post('/editon', (req, res) => {
@@ -171,46 +164,72 @@ utilRouter.post('/editon', (req, res) => {
     let newExigenceList = [];
     let newRelationList = [];
 
-    for (const key in req.body.exigences) {
-        let exigence = req.body.exigences[key];
+    for (const key in req.body) {
+        let exigence = req.body[key];
 
-        newExigenceList.push({
-            _id: exigence._id,
-            type: TYPES.EXIGENCE,
-            name: exigence.name,
-            slug: exigence.name,
-            category: exigence.category
-        });
+        if (
+            !isEmpty(exigence._id)
+            && !isEmpty(exigence.name)
+            && !isEmpty(exigence.url)
+            && !isEmpty(exigence.category)
+        ) {
+            newExigenceList.push({
+                _id: exigence._id,
+                type: TYPES.EXIGENCE,
+                name: exigence.name,
+                url: exigence.url[0] === '/' ? exigence.url : `/${exigence.url}`,
+                category: exigence.category
+            });
+        }
 
         for (const keyRelation in exigence.relations) {
             let relation = exigence.relations[keyRelation];
 
-            newRelationList.push({
-                _id: relation._id,
-                type: TYPES.RELATION,
-                name: relation.name,
-                exigence_1_id: exigence._id,
-                exigence_2_id: relation.exigence_2_id
-            })
+            if (
+                !isEmpty(relation._id)
+                && !isEmpty(relation.name)
+                && !isEmpty(relation.exigence_2_id)
+            ) {
+                newRelationList.push({
+                    _id: relation._id,
+                    type: TYPES.RELATION,
+                    name: relation.name,
+                    exigence_1_id: exigence._id,
+                    exigence_2_id: relation.exigence_2_id
+                })
+            }
         }
 
     }
 
     // DELETE
-    cleanDB(req);
+    cleanDB(req.mangodb).then(() => {
+        // PUSH NEW OBJECTS
+        if (isEmpty(newExigenceList)) {
+            res.send([]);
+        }
+        req.mangodb.collection(TYPES.EXIGENCE).insertMany(
+            newExigenceList,
+            (err, result) => {
+                if (err) throw err;
 
-    // PUSH NEW OBJECTS
-    req.mangodb.collection(TYPES.EXIGENCE).insertMany(
-        newExigenceList,
-        (err, result) => {
-            if (err) throw err;
-        });
-
-    req.mangodb.collection(TYPES.RELATION).insertMany(
-        newRelationList,
-        (err, result) => {
-            if (err) throw err;
-        });
+                if (isEmpty(newRelationList)) {
+                    getExigencesWithRelations(req.mangodb).then(result => {
+                        res.send(result);
+                    });
+                } else {
+                    req.mangodb.collection(TYPES.RELATION).insertMany(
+                        newRelationList,
+                        (err, result) => {
+                            if (err) throw err;
+    
+                            getExigencesWithRelations(req.mangodb).then(result => {
+                                res.send(result);
+                            });
+                        });
+                }
+            });
+    });
 
 });
 
