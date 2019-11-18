@@ -15,7 +15,7 @@ exigenceRouter.get('/all', (req, res) => {
 });
 
 exigenceRouter.get('/:id', async (req, res) => {
-    let exigence = await getExigenceFromId(req, req.params.id);
+    let exigence = await getExigenceFromId(req.mangodb, req.params.id);
     res.send(exigence);
 });
 
@@ -24,7 +24,8 @@ exigenceRouter.post('/new', (req, res) => {
         {
             type: TYPES.EXIGENCE,
             name: req.body.name,
-            slug: req.body.slug // TODO: do it here from name
+            url: req.body.url,
+            category: req.body.category
         },
         (err, result) => {
             if (err) throw err;

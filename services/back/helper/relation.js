@@ -1,12 +1,13 @@
 
 import { TYPES } from '../constants';
 
-export function getExigenceFromId(mangodb, id) {
+export function getRelationsFromExigence1Id(mangodb, id) {
     return new Promise(resolve => {
-        mangodb.collection(TYPES.EXIGENCE).findOne(
+        mangodb.collection(TYPES.RELATION).find(
             {
-                _id: id
-            },
+                exigence_1_id: id
+            }
+        ).toArray(
             (err, result) => {
                 if (err) throw err;
                 resolve(result);

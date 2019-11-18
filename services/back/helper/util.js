@@ -1,53 +1,81 @@
-
+import { getRelationsFromExigence1Id } from '../helper/relation';
 import { TYPES, CATEGORY_TYPES, RELATION_TYPES } from '../constants';
 
-export function cleanDB(req) {
-    req.mangodb.collection(TYPES.EXIGENCE).deleteMany(
+export function cleanDB(mangodb) {
+  return Promise.all([
+    new Promise(resolve => {
+      mangodb.collection(TYPES.EXIGENCE).deleteMany(
         {},
-        (err, obj) => {
-            if (err) throw err;
+        (err, result) => {
+          if (err) throw err;
+          resolve(result);
         });
-
-    req.mangodb.collection(TYPES.RELATION).deleteMany(
+    }),
+    new Promise(resolve => {
+      mangodb.collection(TYPES.RELATION).deleteMany(
         {},
-        (err, obj) => {
-            if (err) throw err;
+        (err, result) => {
+          if (err) throw err;
+          resolve(result);
         });
+    }),
+  ]);
 };
 
-export function addFakeData(req) {
-    req.mangodb.collection(TYPES.EXIGENCE).insertMany(
-        [
-          {
-            _id: 'exigence_id_1',
-            type: TYPES.EXIGENCE,
-            name: 'Choux Fleur',
-            slug: 'choux fleur',
-            category: CATEGORY_TYPES.LIMIT
-          },
-          {
-            _id: 'exigence_id_2',
-            type: TYPES.EXIGENCE,
-            name: 'Oui mais Non',
-            slug: 'oui mais non',
-            category: CATEGORY_TYPES.TASK
-          }
-        ],
-        (err, result) => {
-            if (err) throw err;
-        });
+export function getExigencesWithRelations(mangodb) {
+  return new Promise(resolve => {
+    mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
+      async (err, result) => {
+          if (err) throw err;
 
-    req.mangodb.collection(TYPES.RELATION).insertMany(
-        [
-          {
-            _id: 'relation_id_1',
-            type: TYPES.RELATION,
-            name: RELATION_TYPES.DISJOINS,
-            exigence_1_id: 'exigence_id_1',
-            exigence_2_id: 'exigence_id_2'
+          let newResult = [];
+
+          for (const key in result) {
+              let exigence = result[key];
+
+              exigence.relations = await getRelationsFromExigence1Id(mangodb, exigence._id);
+
+              newResult.push(exigence);
           }
-        ],
-        (err, result) => {
-            if (err) throw err;
-        });
+
+          resolve(newResult);
+      });
+  })
+};
+
+export function addFakeData(mangodb) {
+  mangodb.collection(TYPES.EXIGENCE).insertMany(
+    [
+      {
+        _id: 'exigence_id_1',
+        type: TYPES.EXIGENCE,
+        name: 'Choux Fleur',
+        url: '/',
+        category: CATEGORY_TYPES.LIMIT
+      },
+      {
+        _id: 'exigence_id_2',
+        type: TYPES.EXIGENCE,
+        name: 'Oui mais Non',
+        url: '/',
+        category: CATEGORY_TYPES.TASK
+      }
+    ],
+    (err, result) => {
+      if (err) throw err;
+    });
+
+  mangodb.collection(TYPES.RELATION).insertMany(
+    [
+      {
+        _id: 'relation_id_1',
+        type: TYPES.RELATION,
+        name: RELATION_TYPES.DISJOINS,
+        exigence_1_id: 'exigence_id_1',
+        exigence_2_id: 'exigence_id_2'
+      }
+    ],
+    (err, result) => {
+      if (err) throw err;
+    });
 };
