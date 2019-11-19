@@ -110,9 +110,6 @@ export default {
             this.$toast.success('Données transférées', 'OK', this.success);
           });
       };
-      reader.onerror = (evt) => {
-        console.error(evt);
-      };
     },
   },
 
