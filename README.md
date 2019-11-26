@@ -23,7 +23,7 @@ sudo ./scripts/init_back.sh
 sudo ./scripts/init_front.sh
 ```
 
-### To push the project on Heroku
+### To host the project on Heroku
 ![](/doc/hosted.png)
 
 1. Go to `root` of git repository
