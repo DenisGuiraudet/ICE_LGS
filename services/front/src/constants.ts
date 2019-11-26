@@ -1,5 +1,5 @@
 
-export const backUrl = 'http://localhost:3000';
+export const backUrl = process.env.NODE_ENV === 'production' ? 'https://ice-lgs-back.herokuapp.com' : 'http://localhost:3000';
 
 export const docUrl = 'https://mi-git.univ-tlse2.fr/ECb/LGS';
 

@@ -1,13 +1,14 @@
 # ICE_LGS
-https://mi-git.univ-tlse2.fr/ECb/LGS
+
+Hosted on : https://ice-lgs.herokuapp.com/
+
+Exigences repository : https://mi-git.univ-tlse2.fr/ECb/LGS
 
 ### Requirements
 
 `Linux` or `Mac` for easy `shell` scripts
-
-- [npm](https://doc.ubuntu-fr.org/nodejs)
-- [docker](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-- [docker-compose](https://docs.docker.com/compose/install/)
+- docker : https://docs.docker.com/install/linux/docker-ce/ubuntu/
+- docker-compose : https://docs.docker.com/compose/install/
 
 ### To start project
 
@@ -21,6 +22,16 @@ sudo ./scripts/init_back.sh
 sudo ./scripts/init_front.sh
 ```
 
+### To push project on Heroku
+1. Go to `root` of git repository
+2. Push `back` on [Heroku](https://dashboard.heroku.com/apps/ice-lgs-back)
+```
+sudo ./scripts/push_back.sh
+```
+3. Push `front` on [Heroku](https://dashboard.heroku.com/apps/ice-lgs)
+```
+sudo ./scripts/push_front.sh
+```
 
 ### Back Documentation
 

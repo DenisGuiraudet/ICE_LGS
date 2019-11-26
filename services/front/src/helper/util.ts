@@ -12,14 +12,14 @@ export function newExigence() {
     category: null,
     relations: [],
   };
-};
+}
 
-export function newRelation(exigence_1_id: String) {
+export function newRelation(exigenceId: String) {
   return {
     _id: uuidv4(),
     type: TYPES.RELATION,
     name: '',
-    exigence_1_id,
+    exigence_1_id: exigenceId,
     exigence_2_id: null,
   };
-};
+}

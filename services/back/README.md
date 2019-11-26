@@ -2,13 +2,6 @@
 
 ### Models
 
-#### Category
-
-Type:
-```
-String
-```
-
 #### Exigence
 
 Object:
@@ -22,11 +15,6 @@ Object:
 ```
 
 #### Relation
-
-Type:
-```
-String
-```
 
 Object:
 ```
@@ -65,7 +53,7 @@ Edition:
 
 | USE | TYPE | ROUTE | DATA TO SEND | RESULT |
 | --- | --- | --- | --- | --- |
-| `EDIT` | GET | /category/types | | Category Type List |
+| | GET | /category/types | | Category Type List |
 
 #### Exigence
 
@@ -79,7 +67,7 @@ Edition:
 
 | USE | TYPE | ROUTE | DATA TO SEND | RESULT |
 | --- | --- | --- | --- | --- |
-| `EDIT` | GET | /relation/types | | Relation Type List |
+| | GET | /relation/types | | Relation Type List |
 | | GET | /relation/:id | | Relation |
 | | GET | /relation/all | | Relation List |
 | | POST | /relation/new | `name`, `exigence_1_id`, `exigence_2_id` | Relation |
@@ -88,6 +76,7 @@ Edition:
 
 | USE | TYPE | ROUTE | DATA TO SEND | RESULT |
 | --- | --- | --- | --- | --- |
+| | GET | /util/test | | "test" String |
 | `VIEW` | GET | /util/exigences_with_category | | Exigence List, Category List |
 | `VIEW` | GET | /util/exigences_from_category_name/:name | | Exigence List |
 | `VIEW` | GET | /util/relations_from_exigence/:id | | Exigence List, Relation List, Exigence List |
