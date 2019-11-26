@@ -10,7 +10,7 @@ Exigences repository : https://mi-git.univ-tlse2.fr/ECb/LGS
 - docker : https://docs.docker.com/install/linux/docker-ce/ubuntu/
 - docker-compose : https://docs.docker.com/compose/install/
 
-### To start project
+### To start the project localy
 ![](/doc/local.png)
 
 1. Go to `root` of git repository
@@ -23,7 +23,7 @@ sudo ./scripts/init_back.sh
 sudo ./scripts/init_front.sh
 ```
 
-### To push project on Heroku
+### To push the project on Heroku
 ![](/doc/hosted.png)
 
 1. Go to `root` of git repository
