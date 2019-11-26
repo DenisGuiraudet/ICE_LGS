@@ -28,7 +28,9 @@
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                   @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
-                {{ value.url }} - {{ value.name }}
+                <template v-if="value.url">
+                  {{ value.url }} -
+                </template>
               </td>
               <td
                   v-else
@@ -68,7 +70,10 @@
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                   @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
-                {{ value.url }} - {{ value.name }}
+                <template v-if="value.url">
+                  {{ value.url }} -
+                </template>
+                {{ value.name }}
               </td>
               <td
                   v-else

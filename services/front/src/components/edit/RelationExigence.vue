@@ -42,7 +42,7 @@
                   :value="exigenceItem._id"
                   :disabled="exigenceItem._id === selectedExigence._id"
                 >
-                {{ exigenceItem.name }}
+                {{ exigenceItem.url }} - {{ exigenceItem.name }}
               </option>
             </select>
           </div>
