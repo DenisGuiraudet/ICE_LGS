@@ -1,7 +1,7 @@
 version: "2"
 services:
-  app:
-    container_name: app
+  back:
+    container_name: back
     restart: always
     build: .
     ports:

@@ -11,7 +11,7 @@ const MONGO_WWW_URL = 'mongodb+srv://root:root@cluster0-shj60.azure.mongodb.net/
 export const MONGO = {
     HOST: MONGO_HOST,
     PORT: MONGO_PORT,
-    DB: 'test',
+    DB: 'LGS',
     URL: process.env.NODE_ENV === 'production' ? MONGO_WWW_URL : 'mongodb://' + MONGO_HOST + ':' + MONGO_PORT,
 }
 
@@ -24,11 +24,18 @@ export const TYPES = {
 export const CATEGORY_TYPES = {
     BEHAVIOR: 'BEHAVIOR',
     COMPONENT: 'COMPONENT',
+    COMPONENT_ACTOR: 'COMPONENT / Actor',
     CONSTRAINT: 'CONSTRAINT',
+    CONSTRAINT_ASSUMPTION: 'CONSTRAINT / Assumption',
+    CONSTRAINT_OBLIGATION: 'CONSTRAINT / Obligation',
+    CONSTRAINT_BUSINESS_RULE: 'CONSTRAINT / Business rule',
+    CONSTRAINT_ENGINEERING_DECISION: 'CONSTRAINT / Engineering decision',
+    CONSTRAINT_PHYSICAL_RULE: 'CONSTRAINT / Physical rule',
     GOAL: 'GOAL',
     LACK: 'LACK',
     LIMIT: 'LIMIT',
-    META_REQUIREMENT: 'META_REQUIREMENT',
+    META_REQUIREMENT: 'META REQUIREMENT',
+    META_REQUIREMENT_JUSTIFICATION: 'META REQUIREMENT / Justification',
     PRODUCT: 'PRODUCT',
     TASK: 'TASK',
 }

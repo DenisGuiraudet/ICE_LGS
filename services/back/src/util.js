@@ -175,13 +175,15 @@ utilRouter.post('/editon', (req, res) => {
             !isEmpty(exigence._id)
             && !isEmpty(exigence.name)
             && !isEmpty(exigence.url)
+            && !isEmpty(exigence.line)
             && !isEmpty(exigence.category)
         ) {
             newExigenceList.push({
                 _id: exigence._id,
                 type: TYPES.EXIGENCE,
                 name: exigence.name,
-                url: exigence.url[0] === '/' ? exigence.url : `/${exigence.url}`,
+                url: exigence.url,
+                line: exigence.line,
                 category: exigence.category
             });
         }

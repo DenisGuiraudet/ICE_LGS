@@ -10,6 +10,8 @@ Object:
     _id: String,
     type: "EXIGENCE",
     name: String,
+    url: String,
+    line: Number,
     category: String
 }
 ```
@@ -36,6 +38,8 @@ Edition:
         _id: String, // existing or new
         name: String,
         category: String,
+        url: String,
+        line: Number,
         relations: [
             {
                 _id: String, // existing or new

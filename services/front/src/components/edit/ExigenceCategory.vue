@@ -2,10 +2,11 @@
   <div id="exigenceCategory" class="edit_container">
     <div class="edit_table">
       <div class="title">
+        <div class="cell">PAGE</div>
         <div class="cell">
           {{ $options.TYPES.EXIGENCE }}
         </div>
-        <div class="cell">URL</div>
+        <div class="cell">LINE</div>
         <div class="cell">
           {{ $options.TYPES.CATEGORY }}
         </div>
@@ -17,6 +18,21 @@
           :class="{ 'active': selectedExigence && selectedExigence._id === exigence._id }"
         >
         <div class="cell">
+          <select v-model="exigence.url">
+            <option
+                disabled
+                :value="null"
+              />
+            <option
+                v-for="urlPage in $options.URL_PAGES"
+                :key="urlPage"
+                :value="urlPage"
+              >
+              {{ urlPage }}
+            </option>
+          </select>
+        </div>
+        <div class="cell">
           <input
               type="text"
               v-model="exigence.name"
@@ -25,9 +41,9 @@
         </div>
         <div class="cell">
           <input
-              type="text"
-              v-model="exigence.url"
-              placeholder="url"
+              type="number"
+              v-model="exigence.line"
+              placeholder="line"
             />
         </div>
         <div class="cell">
@@ -83,7 +99,7 @@
 
 <script>
 import { newExigence } from '@/helper/util';
-import { TYPES, CATEGORY_TYPES } from '@/constants';
+import { TYPES, CATEGORY_TYPES, URL_PAGES } from '@/constants';
 
 
 export default {
@@ -92,6 +108,7 @@ export default {
 
   TYPES,
   CATEGORY_TYPES,
+  URL_PAGES,
 
   props: {
     selectedExigence: {
