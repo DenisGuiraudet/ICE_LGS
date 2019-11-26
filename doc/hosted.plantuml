@@ -1,0 +1,22 @@
+@startuml
+
+folder Client {
+    actor actor
+}
+
+folder Server {
+  node Vue.JS
+  artifact vueStart as "npm start"
+  node Node
+  artifact nodeStart as "npm start"
+}
+
+database MongoDB
+
+actor -right- Vue.JS
+vueStart -up- Vue.JS
+Vue.JS -right- Node
+nodeStart -up- Node
+Node -right- MongoDB
+
+@enduml

@@ -11,6 +11,7 @@ Exigences repository : https://mi-git.univ-tlse2.fr/ECb/LGS
 - docker-compose : https://docs.docker.com/compose/install/
 
 ### To start project
+![](https://github.com/DenisGuiraudet/ICE_LGS/doc/local.png)
 
 1. Go to `root` of git repository
 2. Start `back` with
@@ -23,6 +24,8 @@ sudo ./scripts/init_front.sh
 ```
 
 ### To push project on Heroku
+![](https://github.com/DenisGuiraudet/ICE_LGS/doc/hosted.png)
+
 1. Go to `root` of git repository
 2. Push `back` on [Heroku](https://dashboard.heroku.com/apps/ice-lgs-back)
 ```
