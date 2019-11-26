@@ -7,7 +7,7 @@ import { TYPES } from '../constants';
 var exigenceRouter = Router();
 
 exigenceRouter.get('/all', (req, res) => {
-    req.mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
+    req.mangodb.collection(TYPES.EXIGENCE).find({}).sort({url: 1, line: 1}).toArray(
         (err, result) => {
             if (err) throw err;
             res.send(result)

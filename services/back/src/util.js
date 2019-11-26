@@ -16,7 +16,7 @@ utilRouter.get('/test', (req, res) => {
 // VIEW
 
 utilRouter.get('/exigences_with_category', (req, res) => {
-    req.mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
+    req.mangodb.collection(TYPES.EXIGENCE).find({}).sort({url: 1, line: 1}).toArray(
         (err, result) => {
             if (err) throw err;
 
@@ -46,7 +46,7 @@ utilRouter.get('/exigences_from_category_name/:name', (req, res) => {
         {
             category: req.params.name
         }
-    ).toArray(
+    ).sort({url: 1, line: 1}).toArray(
         (err, result) => {
             if (err) throw err;
 
@@ -174,16 +174,13 @@ utilRouter.post('/editon', (req, res) => {
         if (
             !isEmpty(exigence._id)
             && !isEmpty(exigence.name)
-            && !isEmpty(exigence.url)
-            && !isEmpty(exigence.line)
-            && !isEmpty(exigence.category)
         ) {
             newExigenceList.push({
                 _id: exigence._id,
                 type: TYPES.EXIGENCE,
                 name: exigence.name,
                 url: exigence.url,
-                line: exigence.line,
+                line: Number(exigence.line),
                 category: exigence.category
             });
         }

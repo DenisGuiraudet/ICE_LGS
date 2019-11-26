@@ -24,7 +24,7 @@ export function cleanDB(mangodb) {
 
 export function getExigencesWithRelations(mangodb) {
   return new Promise(resolve => {
-    mangodb.collection(TYPES.EXIGENCE).find({}).toArray(
+    mangodb.collection(TYPES.EXIGENCE).find({}).sort({url: 1, line: 1}).toArray(
       async (err, result) => {
           if (err) throw err;
 

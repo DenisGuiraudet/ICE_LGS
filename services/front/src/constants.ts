@@ -3,7 +3,7 @@ export const backUrl = process.env.NODE_ENV === 'production' ? 'https://ice-lgs-
 
 export const docUrl = 'https://mi-git.univ-tlse2.fr/ECb/LGS/blob/master/';
 
-export const success = {
+export const toastPosition = {
   position: 'bottomRight',
 };
 
