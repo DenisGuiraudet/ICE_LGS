@@ -28,7 +28,7 @@
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                   @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
-                {{ value.name }}
+                {{ value.url }} - {{ value.name }}
               </td>
               <td
                   v-else
@@ -45,7 +45,7 @@
                   </div>
                   <div class="url_link">
                     <a
-                        :href="$options.docUrl + value.url"
+                        :href="$options.docUrl + value.url + '.txt/#L' + value.line"
                         target="_blank"
                       >
                       <font-awesome-icon icon="external-link-alt" />
@@ -68,7 +68,7 @@
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                   @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
-                {{ value.name }}
+                {{ value.url }} - {{ value.name }}
               </td>
               <td
                   v-else
@@ -85,7 +85,7 @@
                   </div>
                   <div class="url_link">
                     <a
-                        :href="$options.docUrl + value.url"
+                        :href="$options.docUrl + value.url + '.txt/#L' + value.line"
                         target="_blank"
                       >
                       <font-awesome-icon icon="external-link-alt" />

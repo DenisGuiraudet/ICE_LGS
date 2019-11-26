@@ -1,7 +1,7 @@
 
 export const backUrl = process.env.NODE_ENV === 'production' ? 'https://ice-lgs-back.herokuapp.com' : 'http://localhost:3000';
 
-export const docUrl = 'https://mi-git.univ-tlse2.fr/ECb/LGS';
+export const docUrl = 'https://mi-git.univ-tlse2.fr/ECb/LGS/blob/master/';
 
 export const success = {
   position: 'bottomRight',
@@ -40,4 +40,16 @@ export const RELATION_TYPES = {
   EXTENDS: 'EXTENDS',
   CONSTRAINTS: 'CONSTRAINTS',
   CHARACTERIZES: 'CHARACTERIZES',
+};
+
+export const URL_PAGES = {
+  ANALOGICAL: 'analogical',
+  ARCHITECTURE: 'architecture',
+  CYLINDERS: 'cylinders',
+  DESCRIPTION: 'description',
+  ELECTRO_VALVES: 'electro-valves',
+  HEALTH: 'health',
+  REQS: 'reqs',
+  SCENARIOS: 'scenarios',
+  TIMING: 'timing',
 };

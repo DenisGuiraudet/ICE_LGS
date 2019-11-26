@@ -11,7 +11,7 @@ const MONGO_WWW_URL = 'mongodb+srv://root:root@cluster0-shj60.azure.mongodb.net/
 export const MONGO = {
     HOST: MONGO_HOST,
     PORT: MONGO_PORT,
-    DB: 'test',
+    DB: 'LGS',
     URL: process.env.NODE_ENV === 'production' ? MONGO_WWW_URL : 'mongodb://' + MONGO_HOST + ':' + MONGO_PORT,
 }
 
