@@ -8,6 +8,10 @@ import { TYPES } from '../constants';
 
 var utilRouter = Router();
 
+utilRouter.get('/test', (req, res) => {
+    res.send('test');
+});
+
 
 // VIEW
 

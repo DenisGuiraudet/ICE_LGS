@@ -32,7 +32,6 @@ export default {
 
   methods: {
     callAPI(value, idTable) {
-      console.log(value.type);
       switch (value.type) {
         case TYPES.CATEGORY:
           axios
