@@ -44,7 +44,10 @@
                     {{ value.name }}
                   </div>
                   <div class="url_link">
-                    <a :href="$options.docUrl + value.url">
+                    <a
+                        :href="$options.docUrl + value.url"
+                        target="_blank"
+                      >
                       <font-awesome-icon icon="external-link-alt" />
                     </a>
                   </div>
@@ -81,7 +84,10 @@
                     {{ value.name }}
                   </div>
                   <div class="url_link">
-                    <a :href="$options.docUrl + value.url" target="_blank">
+                    <a
+                        :href="$options.docUrl + value.url"
+                        target="_blank"
+                      >
                       <font-awesome-icon icon="external-link-alt" />
                     </a>
                   </div>
