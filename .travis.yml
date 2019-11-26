@@ -4,5 +4,7 @@ services:
   - docker
 
 script:
-- sudo ./scripts/init_back.sh
-- sudo ./scripts/init_front.sh
+- cd ./services/front 
+- docker-compose up
+- cd ../back 
+- docker-compose up
