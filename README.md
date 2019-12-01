@@ -1,5 +1,7 @@
 # ICE_LGS
 
+Be sure to wait 2 min for the server to start
+
 Hosted on : https://ice-lgs.herokuapp.com/
 
 Exigences repository : https://mi-git.univ-tlse2.fr/ECb/LGS
