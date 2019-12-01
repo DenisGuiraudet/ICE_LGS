@@ -28,7 +28,7 @@
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                   @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
-                {{ value.url }} - {{ value.name }}
+                {{ value.name }}
               </td>
               <td
                   v-else
@@ -41,7 +41,7 @@
                       class="url_name"
                       @click="selectValue(value, item, itemKey, currentElement.idTable)"
                     >
-                    {{ value.name }}
+                    {{ value.url }} - {{ value.name }}
                   </div>
                   <div class="url_link">
                     <a
@@ -68,7 +68,7 @@
                   :class="{ 'active': selectedValueId === item[0]._id + value._id + itemKey }"
                   @click="selectValue(value, item, itemKey, currentElement.idTable)"
                 >
-                {{ value.url }} - {{ value.name }}
+                {{ value.name }}
               </td>
               <td
                   v-else
@@ -81,7 +81,7 @@
                       class="url_name"
                       @click="selectValue(value, item, itemKey, currentElement.idTable)"
                     >
-                    {{ value.name }}
+                    {{ value.url }} - {{ value.name }}
                   </div>
                   <div class="url_link">
                     <a
@@ -164,6 +164,7 @@ export default {
   .table-container-content {
     position: relative;
     margin: 25px;
+    max-width: 850px;
     .header {
       position: sticky;
       top: 0;
@@ -173,6 +174,9 @@ export default {
       border: 1px white solid;
       margin-bottom: 10px;
       padding: 5px;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      white-space: nowrap;
     }
     .searchbar{
       position: sticky;
@@ -225,7 +229,7 @@ export default {
           text-align: center;
         }
         td {
-          max-width: 200px;
+          max-width: 300px;
           cursor: pointer;
               transition: background-color 0.3s;
           &.active,

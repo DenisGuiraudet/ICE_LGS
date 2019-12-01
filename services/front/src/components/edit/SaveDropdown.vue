@@ -52,7 +52,7 @@ import fileDownload from 'js-file-download';
 import moment from 'moment';
 import { CollapseTransition } from 'vue2-transitions';
 
-import { backUrl, success } from '@/constants';
+import { backUrl, toastPosition } from '@/constants';
 
 export default {
   components: {
@@ -84,14 +84,18 @@ export default {
         )
         .then((response) => {
           this.$emit('exigenceListChanged', response.data);
-          this.$toast.success('Données enregistrées!', 'OK', success);
+          this.$toast.success('Données enregistrées !', 'OK', toastPosition);
+        }).catch((response) => {
+          this.$toast.error('Erreur !', 'OK', toastPosition);
         });
     },
     download() {
       axios
         .get(`${backUrl}/util/editon`)
         .then((response) => {
-          fileDownload(JSON.stringify(response.data), `lgs_${moment().format('YYYY_MM_DD')}.json`);
+          fileDownload(JSON.stringify(response.data), `lgs_${moment().format('YYYY_MM_DD_HH_mm_ss')}.json`);
+        }).catch((response) => {
+          this.$toast.error('Erreur !', 'OK', toastPosition);
         });
     },
     upload() {
@@ -107,7 +111,9 @@ export default {
           )
           .then((response) => {
             this.$emit('exigenceListChanged', response.data);
-            this.$toast.success('Données transférées', 'OK', this.success);
+            this.$toast.success('Données transférées', 'OK', toastPosition);
+          }).catch((response) => {
+            this.$toast.error('Erreur !', 'OK', toastPosition);
           });
       };
     },
